@@ -9,6 +9,7 @@ export interface requestInterceptors<T = AxiosResponse> {
 }
 
 export interface requestConfig<T = AxiosResponse> extends AxiosRequestConfig {
-  interceptors?: requestInterceptors<T>
+  interceptors?: requestInterceptors<T>,
+  showLoading?: boolean
 }
 

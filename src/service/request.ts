@@ -1,5 +1,6 @@
 import axios from "axios"
 import NProgress from "nprogress"
+import { useSystemStore } from "@/stores/system"
 import type { AxiosInstance, InternalAxiosRequestConfig } from "axios"
 import type { requestInterceptors, requestConfig } from "./type"
 
@@ -22,21 +23,28 @@ class myAxios {
     )
     this.instance.interceptors.request.use((config) => {
       NProgress.start();
-      console.log(NProgress);
       return config
     }, (error) => {
       return error
     })
     this.instance.interceptors.response.use((config) => {
       NProgress.done();
+      const systemStore = useSystemStore()
+      systemStore.loading = false
       return config.data
     }, (error) => {
+      const systemStore = useSystemStore()
+      systemStore.loading = false
       NProgress.done()
       return error
     })
   }
 
   request<T>(config: requestConfig<T>): Promise<T> {
+    if (config.showLoading) {
+      const systemStore = useSystemStore()
+      systemStore.loading = true
+    }
     return new Promise((resolve, reject) => {
       if (config.interceptors?.requestInterceptors) {
         config = config.interceptors.requestInterceptors(config as InternalAxiosRequestConfig)
