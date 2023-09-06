@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import LoginBox from "@/views/login/LoginBox.vue"
 import { useSystemStore } from "@/stores/system"
+import { RouterView } from "vue-router"
+import { theme } from "ant-design-vue"
 const systemStore = useSystemStore()
 </script>
 
 <template>
-  <a-config-provider
+  <!-- <a-config-provider
     :theme="{
       token: {
         colorPrimary: '#292929'
@@ -13,7 +14,16 @@ const systemStore = useSystemStore()
     }"
   >
     <a-spin :spinning="systemStore.loading" wrapperClassName="loading-container">
-      <LoginBox />
+      <RouterView />
+    </a-spin>
+  </a-config-provider> -->
+  <a-config-provider
+    :theme="{
+      algorithm: theme.defaultAlgorithm
+    }"
+  >
+    <a-spin :spinning="systemStore.loading" wrapperClassName="loading-container">
+      <RouterView />
     </a-spin>
   </a-config-provider>
 </template>

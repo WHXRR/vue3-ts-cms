@@ -15,7 +15,7 @@ const validateForm = () => {
       .then(() => {
         resolve(true)
       })
-      .catch((err) => {
+      .catch(() => {
         reject(false)
       })
   })

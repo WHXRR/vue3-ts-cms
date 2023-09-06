@@ -9,7 +9,7 @@ export interface ILoginResult {
   name: string
 }
 
-export interface IDataType<T> {
+export interface IDataType<T = any> {
   code: number,
   data: T
 }

@@ -35,6 +35,9 @@ class myAxios {
     }, (error) => {
       const systemStore = useSystemStore()
       systemStore.loading = false
+      if (error.response.status === 401) {
+        systemStore.exit()
+      }
       NProgress.done()
       return error
     })

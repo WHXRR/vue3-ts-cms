@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import { useLoginStore } from "@/stores/login"
+import { useUserInfoStore } from "@/stores/user"
+import { useRouter } from "vue-router"
 import AccountForm from "./components/AccountForm.vue"
 import PhoneForm from "./components/PhoneForm.vue"
 import useCache from "@/utils/cache"
@@ -9,6 +11,8 @@ import api from "@/service/api"
 import { UserOutlined, PhoneOutlined } from "@ant-design/icons-vue"
 
 const loginStore = useLoginStore()
+const userStore = useUserInfoStore()
+const router = useRouter()
 
 const activeKey = ref("1")
 
@@ -28,12 +32,18 @@ const submit = async () => {
     })
     let res = await api.accountLogin(accountFormRef.value?.accountFormState)
     loginStore.token = res.data.token
+    userStore.userID = res.data.id
+    useCache.setItem("cmsToken", res.data.token)
+    useCache.setItem("cmsUserID", res.data.id)
+    await userStore.getUserInfo()
+    await userStore.getUserMenu()
+    router.push("/main")
   }
 }
 </script>
 <template>
   <div class="login-container">
-    <div class="login-left">{{ loginStore.token }}</div>
+    <div class="login-left"></div>
     <div class="login-right">
       <div class="login-box">
         <a-tabs v-model:activeKey="activeKey" centered>
