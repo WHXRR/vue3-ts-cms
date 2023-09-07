@@ -14,13 +14,13 @@ const collapsed = ref<boolean>(false)
       <LayoutMenu />
     </a-layout-sider>
     <a-layout>
-      <a-layout-header
-        style="padding: 0; height: auto; line-height: 1; background-color: rgba(255, 255, 255, 0.5)"
-      >
+      <a-layout-header style="padding: 0; height: auto; line-height: 1">
         <LayoutHeader />
       </a-layout-header>
       <a-layout-content>
-        <router-view />
+        <div style="padding: 10px; height: 100%">
+          <router-view />
+        </div>
       </a-layout-content>
       <a-layout-footer style="text-align: center">
         <LayoutFooter />
@@ -28,3 +28,9 @@ const collapsed = ref<boolean>(false)
     </a-layout>
   </a-layout>
 </template>
+
+<style scoped lang="scss">
+.ant-layout-header {
+  background: var(--background-color);
+}
+</style>

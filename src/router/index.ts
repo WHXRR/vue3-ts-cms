@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router"
+import { firstMenu } from "./mapRoutes"
 import useCache from "@/utils/cache"
 
 const router = createRouter({
@@ -30,6 +31,9 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const token = useCache.getItem("cmsToken")
   if (to.path !== "/login") {
+    if (to.path === '/main') {
+      next(firstMenu)
+    }
     if (!token) {
       next("/login")
     } else {

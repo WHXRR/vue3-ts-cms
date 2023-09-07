@@ -1,5 +1,6 @@
 import type { RouteRecordRaw } from "vue-router";
 
+let firstMenu = ''
 export default async function (userMenu: any[]): Promise<RouteRecordRaw[]> {
   const routes: RouteRecordRaw[] = []
 
@@ -12,6 +13,9 @@ export default async function (userMenu: any[]): Promise<RouteRecordRaw[]> {
   const _recurseGetRoute = (menus: any[]) => {
     for (const menu of menus) {
       if (menu.type === 2) {
+        if (!firstMenu) {
+          firstMenu = menu.url
+        }
         const route = allRoutes.find(route => route.path === menu.url)
         if (route) {
           routes.push(route)
@@ -33,4 +37,8 @@ async function getAllRoutes(): Promise<RouteRecordRaw[]> {
     allRoutes.push(res.default)
   }
   return allRoutes
+}
+
+export {
+  firstMenu
 }

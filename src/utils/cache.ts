@@ -1,15 +1,18 @@
 class LocalCache {
-  setItem(key: string, value: any) {
-    localStorage.setItem(key, JSON.stringify(value))
+  setItem(key: string, value: any, useSessionStorage?: boolean) {
+    const storage = useSessionStorage ? sessionStorage : localStorage
+    storage.setItem(key, JSON.stringify(value))
   }
-  getItem(key: string) {
-    const value = localStorage.getItem(key)
+  getItem(key: string, useSessionStorage?: boolean) {
+    const storage = useSessionStorage ? sessionStorage : localStorage
+    const value = storage.getItem(key)
     if (value) {
       return JSON.parse(value)
     }
   }
-  removeItem(key: string) {
-    localStorage.removeItem(key)
+  removeItem(key: string, useSessionStorage?: boolean) {
+    const storage = useSessionStorage ? sessionStorage : localStorage
+    storage.removeItem(key)
   }
 }
 

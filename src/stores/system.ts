@@ -6,6 +6,8 @@ import router from '@/router'
 
 export const useSystemStore = defineStore("system", () => {
   const loading = ref(false)
+  const systemTheme = useCache.getItem("cmsTheme") || ref("light")
+
   function exit() {
     const loginStore = useLoginStore()
     loginStore.token = ""
@@ -17,6 +19,7 @@ export const useSystemStore = defineStore("system", () => {
   }
   return {
     loading,
+    systemTheme,
     exit,
   }
 })

@@ -6,11 +6,14 @@ import useCache from "@/utils/cache"
 import Antd from 'ant-design-vue';
 import App from "./App.vue"
 import router from "./router"
+import setCssVar from "@/utils/useSwitchTheme"
+import { useSystemStore } from "@/stores/system"
 
 import 'normalize.css'
 import './assets/css/base.css'
 import 'ant-design-vue/dist/reset.css';
 import 'nprogress/nprogress.css'
+import '@/assets/css/theme.css'
 
 const app = createApp(App)
 
@@ -24,6 +27,8 @@ app.mount("#app")
 async function init() {
   const loginStore = useLoginStore()
   const userStore = useUserInfoStore()
+  const systemStore = useSystemStore()
+  setCssVar(systemStore.systemTheme)
   const token = useCache.getItem("cmsToken")
   const userID = useCache.getItem("cmsUserID")
   if (token && userID) {
