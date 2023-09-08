@@ -2,3 +2,24 @@
   height: 100vh;
   overflow: hidden;
 }
+::-webkit-scrollbar {
+  width: 6px;
+  height: 2px;
+  cursor: pointer;
+}
+::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+  -webkit-border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:vertical {
+  background-color: var(--scroll-bar-color);
+  -webkit-border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:horizontal {
+  background-color: var(--scroll-bar-color);
+  -webkit-border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:vertical:hover,
+::-webkit-scrollbar-thumb:horizontal:hover {
+  background-color: var(--scroll-bar-color);
+}

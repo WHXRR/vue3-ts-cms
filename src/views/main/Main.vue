@@ -1,16 +1,24 @@
 <script setup lang="ts">
-import { ref } from "vue"
+import { RouterView } from "vue-router"
+import { useSystemStore } from "@/stores/system"
 import LayoutMenu from "@/layout/LayoutMenu.vue"
 import LayoutHeader from "@/layout/LayoutHeader.vue"
 import LayoutFooter from "@/layout/LayoutFooter.vue"
-import { RouterView } from "vue-router"
 
-const collapsed = ref<boolean>(false)
+const systemStore = useSystemStore()
+window.addEventListener("resize", () => {
+  if (window.innerWidth < 768) {
+    systemStore.menuCollapsed = true
+  }
+})
+if (window.innerWidth < 768) {
+  systemStore.menuCollapsed = true
+}
 </script>
 
 <template>
   <a-layout style="min-height: 100vh">
-    <a-layout-sider v-model:collapsed="collapsed" collapsible theme="light">
+    <a-layout-sider v-model:collapsed="systemStore.menuCollapsed" collapsible theme="light">
       <LayoutMenu />
     </a-layout-sider>
     <a-layout>

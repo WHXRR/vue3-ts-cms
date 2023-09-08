@@ -1,4 +1,4 @@
-import CustomForm from "./CustomForm.vue"
+import CustomForm from "./customForm/CustomForm.vue"
 
 export {
   CustomForm
