@@ -33,10 +33,12 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const token = useCache.getItem("cmsToken")
-  // 初始化header的路由tabs
+  // 初始化header的路由tabs和侧边菜单选中
   const systemStore = useSystemStore()
   const userInfoStore = useUserInfoStore()
   const currentRoute = getRoute(userInfoStore.userMenus, to.path)
+  systemStore.openKeys = [currentRoute.parentId]
+  systemStore.selectedKeys = [currentRoute.id]
   if (currentRoute) {
     systemStore.currentTabs = currentRoute.url
     const isSameRoute = systemStore.systemHistoryRoutes.find(item => item.url === currentRoute.url)

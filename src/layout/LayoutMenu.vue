@@ -1,26 +1,15 @@
 <script setup lang="ts">
-import { ref } from "vue"
-import { useRoute, useRouter } from "vue-router"
-import { UserOutlined } from "@ant-design/icons-vue"
+import { useRouter } from "vue-router"
 import { useUserInfoStore } from "@/stores/user"
-import getRoute from "@/utils/getRoute"
+import { useSystemStore } from "@/stores/system"
 
 const userInfoStore = useUserInfoStore()
-const route = useRoute()
+const systemStore = useSystemStore()
 const router = useRouter()
 
-const openKeys = ref<number[]>([])
-const selectedKeys = ref<number[]>([])
-
-const handleMenuClick = (data: any, id: number) => {
+const handleMenuClick = (data: any) => {
   router.push(data.url)
-  openKeys.value = [id]
-  selectedKeys.value = [data.id]
 }
-
-const currentRoute = getRoute(userInfoStore.userMenus, route.path)
-openKeys.value = [currentRoute.parentId]
-selectedKeys.value = [currentRoute.id]
 </script>
 <template>
   <div class="logo">
@@ -193,13 +182,16 @@ selectedKeys.value = [currentRoute.id]
     </svg>
     <span class="system-name">蜡笔小新</span>
   </div>
-  <a-menu v-model:selectedKeys="selectedKeys" mode="inline" v-model:openKeys="openKeys">
+  <a-menu
+    v-model:selectedKeys="systemStore.selectedKeys"
+    mode="inline"
+    v-model:openKeys="systemStore.openKeys"
+  >
     <template v-for="item in userInfoStore.userMenus" :key="item.id">
       <template v-if="item.type === 1">
         <a-sub-menu :key="item.id">
           <template #title>
             <span>
-              <user-outlined />
               <span>{{ item.name }}</span>
             </span>
           </template>

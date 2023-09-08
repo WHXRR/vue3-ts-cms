@@ -16,7 +16,8 @@ export const useSystemStore = defineStore("system", () => {
   const menuCollapsed = ref(false)
   const systemHistoryRoutes = ref<IRoute[]>(useCache.getItem("cmsHistoryRoutes") || [])
   const currentTabs = ref('')
-
+  const openKeys = ref<number[]>([])
+  const selectedKeys = ref<number[]>([])
 
   watch(systemHistoryRoutes, () => {
     useCache.setItem("cmsHistoryRoutes", systemHistoryRoutes.value)
@@ -39,6 +40,8 @@ export const useSystemStore = defineStore("system", () => {
     menuCollapsed,
     systemHistoryRoutes,
     currentTabs,
+    openKeys,
+    selectedKeys,
     exit,
   }
 })
