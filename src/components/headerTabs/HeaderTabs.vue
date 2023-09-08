@@ -19,7 +19,11 @@ const onEdit = (targetKey: string | MouseEvent, action: string) => {
 }
 
 const handleTabClick = (path: string) => {
-  router.replace(path)
+  const tab = systemStore.systemHistoryRoutes.find((tab) => tab.url === path)
+  router.push({
+    path: tab.url,
+    query: tab.query
+  })
 }
 
 const closeAll = () => {

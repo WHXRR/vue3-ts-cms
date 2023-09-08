@@ -16,7 +16,7 @@ export default async function (userMenu: any[]): Promise<RouteRecordRaw[]> {
         if (!firstMenu) {
           firstMenu = menu.url
         }
-        const route = allRoutes.find(route => route.path === menu.url)
+        const route = allRoutes.find(route => route.meta?.url === menu.url)
         if (route) {
           routes.push(route)
         }

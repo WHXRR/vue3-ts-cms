@@ -43,8 +43,13 @@ router.beforeEach(async (to, from, next) => {
     if (!isSameRoute) {
       systemStore.systemHistoryRoutes.push({
         name: currentRoute.name,
-        url: currentRoute.url
+        url: currentRoute.url,
+        query: to.query
       })
+    } else {
+      if (Object.keys(to.query).length) {
+        isSameRoute.query = to.query
+      }
     }
   }
 
