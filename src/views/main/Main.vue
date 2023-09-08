@@ -6,14 +6,11 @@ import LayoutHeader from "@/layout/LayoutHeader.vue"
 import LayoutFooter from "@/layout/LayoutFooter.vue"
 
 const systemStore = useSystemStore()
-window.addEventListener("resize", () => {
-  if (window.innerWidth < 768) {
-    systemStore.menuCollapsed = true
-  }
-})
-if (window.innerWidth < 768) {
-  systemStore.menuCollapsed = true
+const handleSiderCollapse = () => {
+  systemStore.menuCollapsed = window.innerWidth < 768
 }
+window.addEventListener("resize", handleSiderCollapse)
+handleSiderCollapse()
 </script>
 
 <template>
@@ -26,7 +23,7 @@ if (window.innerWidth < 768) {
         <LayoutHeader />
       </a-layout-header>
       <a-layout-content>
-        <div style="padding: 10px; height: 100%">
+        <div class="layout-content">
           <router-view />
         </div>
       </a-layout-content>
@@ -40,5 +37,10 @@ if (window.innerWidth < 768) {
 <style scoped lang="scss">
 .ant-layout-header {
   background: var(--background-color);
+}
+.layout-content {
+  padding: 20px;
+  height: 100%;
+  background-color: var(--content-background-color);
 }
 </style>

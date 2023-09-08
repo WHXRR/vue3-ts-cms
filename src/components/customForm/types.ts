@@ -1,6 +1,7 @@
 type IFormType = 'input' | 'select' | 'datePicker' | 'radio'
 
 export interface IFormItems {
+  filed: string
   type: IFormType
   label: string
   name: string

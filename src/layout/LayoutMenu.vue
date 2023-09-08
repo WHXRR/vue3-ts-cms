@@ -2,6 +2,8 @@
 import { useRouter } from "vue-router"
 import { useUserInfoStore } from "@/stores/user"
 import { useSystemStore } from "@/stores/system"
+import { BugTwoTone, CarTwoTone, BulbTwoTone, HeartTwoTone } from "@ant-design/icons-vue"
+import { h } from "vue"
 
 const userInfoStore = useUserInfoStore()
 const systemStore = useSystemStore()
@@ -10,6 +12,25 @@ const router = useRouter()
 const handleMenuClick = (data: any) => {
   router.push(data.url)
 }
+
+const icons = [
+  () =>
+    h(BugTwoTone, {
+      "two-tone-color": "#dd5048"
+    }),
+  () =>
+    h(CarTwoTone, {
+      "two-tone-color": "#dd5048"
+    }),
+  () =>
+    h(BulbTwoTone, {
+      "two-tone-color": "#dd5048"
+    }),
+  () =>
+    h(HeartTwoTone, {
+      "two-tone-color": "#dd5048"
+    })
+]
 </script>
 <template>
   <div class="logo">
@@ -187,16 +208,16 @@ const handleMenuClick = (data: any) => {
     mode="inline"
     v-model:openKeys="systemStore.openKeys"
   >
-    <template v-for="item in userInfoStore.userMenus" :key="item.id">
+    <template v-for="(item, index) in userInfoStore.userMenus" :key="item.id">
       <template v-if="item.type === 1">
-        <a-sub-menu :key="item.id">
+        <a-sub-menu :key="item.id" :icon="icons[index]">
           <template #title>
             <span>
               <span>{{ item.name }}</span>
             </span>
           </template>
           <template v-for="ele in item.children" :key="ele.id">
-            <a-menu-item :kel="ele.id" @click="handleMenuClick(ele, item.id)">
+            <a-menu-item :kel="ele.id" @click="handleMenuClick(ele)">
               <span>{{ ele.name }}</span>
             </a-menu-item>
           </template>
