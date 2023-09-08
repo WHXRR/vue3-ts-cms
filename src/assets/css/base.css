@@ -2,6 +2,9 @@
   height: 100vh;
   overflow: hidden;
 }
+.pointer {
+  cursor: pointer;
+}
 ::-webkit-scrollbar {
   width: 6px;
   height: 2px;

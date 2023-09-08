@@ -1,7 +1,13 @@
 <script setup lang="ts">
+import { ref } from "vue"
 import { useUserInfoStore } from "@/stores/user"
 import { useSystemStore } from "@/stores/system"
-import { FrownOutlined, SmileOutlined } from "@ant-design/icons-vue"
+import {
+  FrownOutlined,
+  SmileOutlined,
+  FullscreenOutlined,
+  FullscreenExitOutlined
+} from "@ant-design/icons-vue"
 import setCssVar from "@/utils/useSwitchTheme"
 import HeaderTabs from "@/components/headerTabs/HeaderTabs.vue"
 
@@ -11,10 +17,24 @@ const systemStore = useSystemStore()
 const changeTheme = (val: string) => {
   setCssVar(val)
 }
+const isFullScreen = ref(false)
+const fullScreen = () => {
+  isFullScreen.value = !isFullScreen.value
+  const app = document.getElementById("app")
+  if (isFullScreen.value) {
+    app?.requestFullscreen()
+  } else {
+    document.exitFullscreen()
+  }
+}
 </script>
 <template>
   <div class="layout-header">
     <HeaderTabs />
+    <div class="pointer" @click="fullScreen">
+      <FullscreenOutlined v-show="!isFullScreen" />
+      <FullscreenExitOutlined v-show="isFullScreen" />
+    </div>
     <a-switch
       v-model:checked="systemStore.systemTheme"
       checkedValue="light"
