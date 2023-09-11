@@ -31,11 +31,12 @@ export default async function (userMenu: any[]): Promise<RouteRecordRaw[]> {
 }
 async function getAllRoutes(): Promise<RouteRecordRaw[]> {
   const allRoutes: RouteRecordRaw[] = []
-  const routeFiles = import.meta.glob('./main/*/*.ts')
+  const routeFiles:Record<string, any> = import.meta.glob('./main/*/*.ts', { eager: true })
   for (const path in routeFiles) {
-    const res: any = await routeFiles[path]()
-    allRoutes.push(res.default)
+    const route = routeFiles[path].default
+    allRoutes.push(route)
   }
+
   return allRoutes
 }
 
