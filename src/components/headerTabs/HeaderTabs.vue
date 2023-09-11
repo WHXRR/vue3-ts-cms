@@ -21,8 +21,8 @@ const onEdit = (targetKey: string | MouseEvent, action: string) => {
 const handleTabClick = (path: string) => {
   const tab = systemStore.systemHistoryRoutes.find((tab) => tab.url === path)
   router.push({
-    path: tab.url,
-    query: tab.query
+    path: tab?.url,
+    query: tab?.query
   })
 }
 

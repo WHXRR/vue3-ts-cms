@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { watch, PropType, ref } from "vue"
-import { IFormItems, IColStyle } from "./types"
+import { watch, ref } from "vue"
+import type { IFormItems, IColStyle } from "./types"
+import type { PropType } from "vue"
 
 const props = defineProps({
   modelValue: {

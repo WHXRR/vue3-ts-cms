@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { CustomForm } from "@/components"
 import { ref } from "vue"
-import { IForm } from "@/components/customForm/types"
+import type { IForm } from "@/components/customForm/types"
 import api from "@/service/api"
 
 const selectData = ref<any[]>([])
