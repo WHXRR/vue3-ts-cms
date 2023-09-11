@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref, watch } from "vue";
+import { ref, watch, computed } from "vue";
 import { useLoginStore } from "@/stores/login"
 import useCache from "@/utils/cache"
 import router from '@/router'
@@ -12,7 +12,7 @@ interface IRoute {
 
 export const useSystemStore = defineStore("system", () => {
   const loading = ref(false)
-  const systemTheme = useCache.getItem("cmsTheme") || ref("light")
+  const systemTheme = ref(useCache.getItem("cmsTheme") || "light")
   const menuCollapsed = ref(false)
   const systemHistoryRoutes = ref<IRoute[]>(useCache.getItem("cmsHistoryRoutes") || [])
   const currentTabs = ref('')
@@ -24,6 +24,8 @@ export const useSystemStore = defineStore("system", () => {
   }, {
     deep: true
   })
+
+  const systemThemeColor = computed(() => systemTheme.value === "dark" ? "#ff8975" : "#dd5048")
 
   function exit() {
     const loginStore = useLoginStore()
@@ -37,6 +39,7 @@ export const useSystemStore = defineStore("system", () => {
   return {
     loading,
     systemTheme,
+    systemThemeColor,
     menuCollapsed,
     systemHistoryRoutes,
     currentTabs,

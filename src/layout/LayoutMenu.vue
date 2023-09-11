@@ -16,19 +16,19 @@ const handleMenuClick = (data: any) => {
 const icons = [
   () =>
     h(BugTwoTone, {
-      "two-tone-color": "#dd5048"
+      "two-tone-color": systemStore.systemThemeColor
     }),
   () =>
     h(CarTwoTone, {
-      "two-tone-color": "#dd5048"
+      "two-tone-color": systemStore.systemThemeColor
     }),
   () =>
     h(BulbTwoTone, {
-      "two-tone-color": "#dd5048"
+      "two-tone-color": systemStore.systemThemeColor
     }),
   () =>
     h(HeartTwoTone, {
-      "two-tone-color": "#dd5048"
+      "two-tone-color": systemStore.systemThemeColor
     })
 ]
 </script>

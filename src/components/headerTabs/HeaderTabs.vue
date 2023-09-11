@@ -57,7 +57,7 @@ const closeOther = () => {
       <template #rightExtra>
         <a-dropdown placement="bottom">
           <a class="ant-dropdown-link" @click.prevent>
-            <MenuOutlined style="color: #dd5048" />
+            <MenuOutlined :style="{ color: systemStore.systemThemeColor }" />
           </a>
           <template #overlay>
             <a-menu>

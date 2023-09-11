@@ -138,6 +138,7 @@ const fullScreen = () => {
   }
   .user-name {
     padding-left: 10px;
+    color: var(--color);
   }
 }
 </style>

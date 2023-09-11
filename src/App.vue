@@ -7,7 +7,6 @@ const systemStore = useSystemStore()
 const systemTheme = computed(() =>
   systemStore.systemTheme === "dark" ? theme.darkAlgorithm : theme.defaultAlgorithm
 )
-const systemColor = computed(() => (systemStore.systemTheme === "dark" ? "#ffffff" : "#dd5048"))
 </script>
 
 <template>
@@ -15,7 +14,7 @@ const systemColor = computed(() => (systemStore.systemTheme === "dark" ? "#fffff
     :theme="{
       algorithm: systemTheme,
       token: {
-        colorPrimary: systemColor
+        colorPrimary: systemStore.systemThemeColor
       }
     }"
   >
