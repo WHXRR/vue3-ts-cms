@@ -1,7 +1,7 @@
 // 定义主题变量
 const lightTheme = {
   '--background-color': '#ffffff',
-  '--scroll-bar-color': '#1f7eff',
+  '--scroll-bar-color': '#dd5048',
   '--color': '',
   '--tabs-border-bottom-color': 'rgba(5, 5, 5, 0.06)',
   '--content-background-color': '#f5f6fd',

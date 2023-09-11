@@ -1,5 +1,8 @@
 <script setup lang="ts"></script>
 <template>
-  <div>footer</div>
+  <div class="layout-footer">footer</div>
 </template>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.layout-footer {
+}
+</style>

@@ -8,7 +8,7 @@ export const setCssVar = (isDark: string) => {
   const systemStore = useSystemStore()
   Object.entries(theme).forEach(([name, value]) => {
     if (name === '--color') {
-      document.documentElement.style.setProperty(name, systemStore.systemThemeColor)
+      document.documentElement.style.setProperty(name, systemStore.systemThemeColor.color)
     } else {
       document.documentElement.style.setProperty(name, value)
     }

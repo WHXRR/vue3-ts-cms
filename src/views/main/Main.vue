@@ -35,12 +35,30 @@ handleSiderCollapse()
 </template>
 
 <style scoped lang="scss">
+.ant-layout {
+  height: 100%;
+}
 .ant-layout-header {
   background: var(--background-color);
 }
-.layout-content {
-  padding: 20px;
-  height: 100%;
+.ant-layout-content {
+  flex: 1;
+  overflow: hidden;
+  overflow-y: auto;
+  padding: 20px 0 20px 20px;
   background-color: var(--content-background-color);
+}
+.ant-layout-footer {
+  padding: 16px 50px;
+  background: var(--background-color);
+}
+.layout-content {
+  height: 100%;
+  box-sizing: content-box;
+  overflow: hidden;
+  overflow-y: auto;
+  padding-right: 20px;
+  /* padding: 20px;
+  background-color: var(--content-background-color); */
 }
 </style>

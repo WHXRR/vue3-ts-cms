@@ -25,7 +25,19 @@ export const useSystemStore = defineStore("system", () => {
     deep: true
   })
 
-  const systemThemeColor = computed(() => systemTheme.value === "dark" ? "#ff8975" : "#dd5048")
+  const systemThemeColor = computed(() => {
+    if (systemTheme.value === "dark") {
+      return {
+        color: "#ff8975",
+        bgColor: "#1b1c21"
+      }
+    } else {
+      return {
+        color: "#dd5048",
+        bgColor: "#ffffff"
+      }
+    }
+  })
 
   function exit() {
     const loginStore = useLoginStore()

@@ -14,7 +14,8 @@ const systemTheme = computed(() =>
     :theme="{
       algorithm: systemTheme,
       token: {
-        colorPrimary: systemStore.systemThemeColor
+        colorPrimary: systemStore.systemThemeColor.color,
+        colorBgBase: systemStore.systemThemeColor.bgColor
       }
     }"
   >

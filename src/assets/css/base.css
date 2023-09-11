@@ -5,6 +5,9 @@
 .pointer {
   cursor: pointer;
 }
+.box-module-shadow {
+  box-shadow: var(--box-shadow);
+}
 ::-webkit-scrollbar {
   width: 6px;
   height: 2px;
