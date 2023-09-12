@@ -8,9 +8,13 @@
 .box-module-shadow {
   box-shadow: var(--box-shadow);
 }
+.table-column-menu .ant-dropdown-menu-title-content {
+  display: flex;
+  justify-content: space-between;
+}
 ::-webkit-scrollbar {
   width: 6px;
-  height: 2px;
+  height: 6px;
   cursor: pointer;
 }
 ::-webkit-scrollbar-track-piece {

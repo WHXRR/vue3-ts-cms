@@ -17,12 +17,14 @@
     "@ant-design/icons-vue": "^6.1.0",
     "ant-design-vue": "^4.0.2",
     "axios": "^1.5.0",
+    "dayjs": "^1.11.9",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
     "pinia": "^2.1.6",
     "sass": "^1.66.1",
     "vue": "^3.3.4",
-    "vue-router": "^4.2.4"
+    "vue-router": "^4.2.4",
+    "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",

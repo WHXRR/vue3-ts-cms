@@ -8,7 +8,7 @@ import {
   FullscreenOutlined,
   FullscreenExitOutlined
 } from "@ant-design/icons-vue"
-import setCssVar from "@/utils/useSwitchTheme"
+import setCssVar from "@/hooks/useSwitchTheme"
 import HeaderTabs from "@/components/headerTabs/HeaderTabs.vue"
 
 const userInfoStore = useUserInfoStore()

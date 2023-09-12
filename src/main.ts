@@ -6,8 +6,9 @@ import useCache from "@/utils/cache"
 import Antd from 'ant-design-vue';
 import App from "./App.vue"
 import router from "./router"
-import setCssVar from "@/utils/useSwitchTheme"
+import setCssVar from "@/hooks/useSwitchTheme"
 import { useSystemStore } from "@/stores/system"
+import { globalRegister } from "@/global"
 
 import 'normalize.css'
 import './assets/css/base.css'
@@ -21,6 +22,7 @@ app.use(createPinia())
 app.use(Antd)
 // 先初始化路由后再注册路由
 await init()
+app.use(globalRegister)
 app.use(router)
 app.mount("#app")
 

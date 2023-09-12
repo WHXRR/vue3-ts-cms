@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { CustomForm } from "@/components"
+import { CustomTable } from "@/components"
 import { ref } from "vue"
-import type { IForm } from "@/components/customForm/types"
 import api from "@/service/api"
+import type { IForm } from "@/components/customForm/types"
 
 const selectData = ref<any[]>([])
 setTimeout(() => {
@@ -75,35 +76,78 @@ const getUserInfo = () => {
       size: 10
     })
     .then((res) => {
-      const { list, totalCount } = res.data
+      const { list } = res.data
       userList.value = list
     })
 }
 getUserInfo()
 const columns = [
   {
+    title: "#",
+    width: 40,
+    dataIndex: "index",
+    align: "center"
+  },
+  {
     title: "用户名",
-    dataIndex: "name"
+    dataIndex: "name",
+    align: "center"
   },
   {
     title: "真实姓名",
-    dataIndex: "realname"
+    dataIndex: "realname",
+    align: "center"
   },
   {
     title: "手机号",
-    dataIndex: "cellphone"
+    dataIndex: "cellphone",
+    align: "center"
+  },
+  {
+    title: "状态",
+    dataIndex: "enable",
+    align: "center"
   },
   {
     title: "创建时间",
-    dataIndex: "createAt"
+    dataIndex: "createAt",
+    align: "center"
+  },
+  {
+    title: "更新时间",
+    dataIndex: "updateAt",
+    align: "center"
   }
 ]
 </script>
 <template>
   <div>
     <CustomForm v-bind="formConfig" v-model="formData" />
-    <div class="user-list box-module-shadow">
-      <a-table :columns="columns" :dataSource="userList"> </a-table>
+    <div class="user-list">
+      <CustomTable :columns="columns" :dataSource="userList">
+        <template #bodyCell="{ column, record, index }">
+          <template v-if="column.dataIndex === 'index'">
+            {{ index + 1 }}
+          </template>
+          <template v-if="column.dataIndex === 'enable'">
+            <span>
+              <a-switch
+                size="small"
+                checked-children="启用"
+                un-checked-children="禁用"
+                :checkedValue="1"
+                :unCheckedValue="0"
+                v-model:checked="record.enable"
+              />
+            </span>
+          </template>
+          <template v-if="['createAt', 'updateAt'].includes(column.dataIndex)">
+            <span>
+              {{ $filters.formatTime(record[column.dataIndex]) }}
+            </span>
+          </template>
+        </template>
+      </CustomTable>
     </div>
   </div>
 </template>
