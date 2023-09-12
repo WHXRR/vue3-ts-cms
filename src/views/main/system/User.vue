@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { CustomForm } from "@/components"
-import { CustomTable } from "@/components"
+import { ControlTableColumnsBtn } from "@/components"
 import { ref } from "vue"
 import api from "@/service/api"
 import type { IForm } from "@/components/customForm/types"
@@ -19,7 +19,6 @@ setTimeout(() => {
     }
   ]
 }, 1000)
-
 const formConfig = ref<IForm>({
   formItems: [
     {
@@ -119,12 +118,16 @@ const columns = [
     align: "center"
   }
 ]
+const tableColumns = ref<any[]>([])
 </script>
 <template>
   <div>
     <CustomForm v-bind="formConfig" v-model="formData" />
-    <div class="user-list">
-      <CustomTable :columns="columns" :dataSource="userList">
+    <div class="mt-20">
+      <div class="options">
+        <ControlTableColumnsBtn :columns="columns" v-model:tableColumns="tableColumns" />
+      </div>
+      <a-table :columns="tableColumns" :dataSource="userList">
         <template #bodyCell="{ column, record, index }">
           <template v-if="column.dataIndex === 'index'">
             {{ index + 1 }}
@@ -147,12 +150,16 @@ const columns = [
             </span>
           </template>
         </template>
-      </CustomTable>
+      </a-table>
     </div>
   </div>
 </template>
 <style lang="scss" scoped>
-.user-list {
+.mt-20 {
   margin-top: 20px;
+}
+.options {
+  text-align: right;
+  margin-bottom: 10px;
 }
 </style>

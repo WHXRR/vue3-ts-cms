@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { watch, ref } from "vue"
+import locale from "ant-design-vue/es/date-picker/locale/zh_CN"
 import type { IFormItems, IColStyle } from "./types"
 import type { PropType } from "vue"
 
@@ -76,6 +77,7 @@ watch(
             <template v-if="item.type === 'datePicker'">
               <a-range-picker
                 size="small"
+                :locale="locale"
                 v-bind="item.options"
                 v-model:value="formData[item.filed]"
               />

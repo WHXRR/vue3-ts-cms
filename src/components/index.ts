@@ -1,7 +1,7 @@
 import CustomForm from "./customForm/CustomForm.vue"
-import CustomTable from "./customTable/CustomTable.vue"
+import ControlTableColumnsBtn from "./controlTableColumnsBtn/ControlTableColumnsBtn.vue"
 
 export {
   CustomForm,
-  CustomTable
+  ControlTableColumnsBtn
 }

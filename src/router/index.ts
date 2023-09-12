@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, createWebHashHistory } from "vue-router"
+import { createRouter, createWebHistory } from "vue-router"
 import { firstMenu } from "./mapRoutes"
 import { useSystemStore } from "@/stores/system"
 import { useUserInfoStore } from "@/stores/user"
@@ -59,7 +59,7 @@ router.beforeEach(async (to, from, next) => {
 
   if (to.path !== "/login") {
     if (!token) {
-      next({name: 'login'})
+      next({ name: 'login' })
     } else {
       if (to.path === '/main') {
         next(firstMenu)

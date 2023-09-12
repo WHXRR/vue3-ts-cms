@@ -3,6 +3,10 @@ import { useSystemStore } from "@/stores/system"
 import { RouterView } from "vue-router"
 import { theme } from "ant-design-vue"
 import { computed } from "vue"
+import "dayjs/locale/zh-cn"
+import dayjs from "dayjs"
+
+dayjs.locale("zh-cn")
 const systemStore = useSystemStore()
 const systemTheme = computed(() =>
   systemStore.systemTheme === "dark" ? theme.darkAlgorithm : theme.defaultAlgorithm
