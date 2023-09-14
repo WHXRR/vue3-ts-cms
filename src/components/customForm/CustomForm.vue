@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { watch, ref } from "vue"
+import { watch, ref, onMounted } from "vue"
+import { useSystemStore } from "@/stores/system"
+import { DownOutlined, UpOutlined } from "@ant-design/icons-vue"
 import type { IFormItems, IColStyle } from "./types"
 import type { PropType } from "vue"
 
+const systemStore = useSystemStore()
 const props = defineProps({
   modelValue: {
     type: Object,
@@ -68,52 +71,100 @@ const reset = () => {
   formRef.value.resetFields()
   emit("reset")
 }
+
+// 表单的收起与展开
+const isCollapsed = ref(false)
+const handleCollapsed = () => {
+  const colHeight = document.querySelector(".form-col .ant-form-item")?.clientHeight
+  const formContainer = document.querySelector(".form-container") as HTMLElement
+  const formHeight = document.querySelector(".form")?.clientHeight
+  const btnsHeight = document.querySelector(".form-btns")?.clientHeight || 0
+  if (isCollapsed.value && colHeight && formHeight) {
+    isCollapsed.value = false
+    formContainer.style.height = formHeight + btnsHeight + "px"
+  } else {
+    isCollapsed.value = true
+    formContainer.style.height = colHeight + "px"
+  }
+}
+onMounted(() => {
+  const formContainer = document.querySelector(".form-container") as HTMLElement
+  const formHeight = document.querySelector(".form")?.clientHeight || 0
+  const btnsHeight = document.querySelector(".form-btns")?.clientHeight || 0
+  formContainer.style.height = formHeight + btnsHeight + "px"
+})
 </script>
 <template>
   <div :class="['custom-form', fixed ? 'fixed' : '']">
-    <a-form name="basic" autocomplete="off" :model="formData" ref="formRef">
-      <a-row>
-        <a-col v-bind="colStyle" v-for="(item, index) in formItems" :key="index">
-          <a-form-item
-            :label="item.label"
-            :name="item.name"
-            :rules="item.rules"
-            :labelCol="formLabelCol"
-          >
-            <template v-if="item.type === 'input'">
-              <a-input size="small" v-bind="item.options" v-model:value="formData[item.filed]" />
-            </template>
-            <template v-if="item.type === 'select'">
-              <a-select size="small" v-bind="item.options" v-model:value="formData[item.filed]" />
-            </template>
-            <template v-if="item.type === 'radio'">
-              <a-radio-group
-                size="small"
-                v-bind="item.options"
-                v-model:value="formData[item.filed]"
-              />
-            </template>
-            <template v-if="item.type === 'datePicker'">
-              <a-range-picker
-                size="small"
-                v-bind="item.options"
-                v-model:value="formData[item.filed]"
-              />
-            </template>
-          </a-form-item>
-        </a-col>
-      </a-row>
-    </a-form>
-    <div class="form-btns">
-      <template v-if="showSubmitBtn">
-        <a-button size="small" type="primary" style="margin-right: 10px" @click="submit">{{
-          submitBtnText || $t("form.submit")
-        }}</a-button>
-      </template>
-      <template v-if="showResetBtn">
-        <a-button size="small" type="primary" ghost @click="reset">{{ $t("form.reset") }}</a-button>
-      </template>
-      <slot name="formBtn"></slot>
+    <div class="form-container">
+      <a-form class="form" name="basic" autocomplete="off" :model="formData" ref="formRef">
+        <a-row>
+          <a-col class="form-col" v-bind="colStyle" v-for="(item, index) in formItems" :key="index">
+            <a-form-item
+              :label="item.label"
+              :name="item.name"
+              :rules="item.rules"
+              :labelCol="formLabelCol"
+            >
+              <template v-if="item.type === 'input'">
+                <a-input size="small" v-bind="item.options" v-model:value="formData[item.filed]" />
+              </template>
+              <template v-if="item.type === 'select'">
+                <a-select size="small" v-bind="item.options" v-model:value="formData[item.filed]" />
+              </template>
+              <template v-if="item.type === 'radio'">
+                <a-radio-group
+                  size="small"
+                  v-bind="item.options"
+                  v-model:value="formData[item.filed]"
+                />
+              </template>
+              <template v-if="item.type === 'datePicker'">
+                <a-range-picker
+                  size="small"
+                  v-bind="item.options"
+                  v-model:value="formData[item.filed]"
+                />
+              </template>
+            </a-form-item>
+          </a-col>
+        </a-row>
+      </a-form>
+      <div class="form-btns">
+        <template v-if="showSubmitBtn">
+          <a-button size="small" type="primary" style="margin-right: 10px" @click="submit">{{
+            submitBtnText || $t("form.submit")
+          }}</a-button>
+        </template>
+        <template v-if="showResetBtn">
+          <a-button size="small" type="primary" ghost @click="reset">{{
+            $t("form.reset")
+          }}</a-button>
+        </template>
+        <slot name="formBtn"></slot>
+      </div>
+    </div>
+    <div style="text-align: right; padding-top: 10px">
+      <a-button
+        size="small"
+        type="link"
+        :style="{ color: systemStore.systemThemeColor.color }"
+        v-show="isCollapsed"
+        @click="handleCollapsed"
+      >
+        {{ $t("form.expand") }}
+        <DownOutlined />
+      </a-button>
+      <a-button
+        size="small"
+        type="link"
+        :style="{ color: systemStore.systemThemeColor.color }"
+        v-show="!isCollapsed"
+        @click="handleCollapsed"
+      >
+        {{ $t("form.collapse") }}
+        <UpOutlined />
+      </a-button>
     </div>
   </div>
 </template>
@@ -124,12 +175,17 @@ const reset = () => {
   z-index: 9;
 }
 .custom-form {
-  padding: 20px;
+  padding: 20px 20px 10px 20px;
   border-radius: 10px;
   background-color: var(--background-color);
   box-shadow: var(--box-shadow);
+  .form-container {
+    overflow: hidden;
+    max-height: 800px;
+    transition: height 0.3s ease-in-out;
+  }
   :deep(.ant-form-item) {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   .form-btns {
     display: flex;

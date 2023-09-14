@@ -71,6 +71,7 @@ getUserInfo()
         :columns="tableColumns"
         :dataSource="userList"
         :pagination="pagination"
+        :scroll="{ x: 'max-content' }"
         @change="handleTableChange"
       >
         <template #bodyCell="{ column, record, index }">

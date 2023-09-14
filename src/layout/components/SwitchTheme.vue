@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useSystemStore } from "@/stores/system"
-import Icon, { FrownOutlined, SmileOutlined } from "@ant-design/icons-vue"
+import Icon from "@ant-design/icons-vue"
 import setCssVar from "@/hooks/useSwitchTheme"
 
 const systemStore = useSystemStore()

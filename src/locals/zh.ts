@@ -36,5 +36,7 @@ export default {
     inputRealname: '请输入真实姓名',
     inputCellphone: '请输入手机号',
     inputSelectEnable: '请选择用户状态',
+    collapse: '收起',
+    expand: '展开'
   }
 }

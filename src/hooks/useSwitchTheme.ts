@@ -7,7 +7,7 @@ export const setCssVar = (isDark: string) => {
   const theme = isDark === 'dark' ? darkTheme : lightTheme
   const systemStore = useSystemStore()
   Object.entries(theme).forEach(([name, value]) => {
-    if (name === '--color') {
+    if (['--color', '--scroll-bar-color'].includes(name)) {
       document.documentElement.style.setProperty(name, systemStore.systemThemeColor.color)
     } else {
       document.documentElement.style.setProperty(name, value)

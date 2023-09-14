@@ -36,5 +36,7 @@ export default {
     inputRealname: 'Please Input Real Name',
     inputCellphone: 'Please Input Phone',
     inputSelectEnable: 'Please Select Status',
+    collapse: 'Collapse',
+    expand: 'Expand',
   }
 }
