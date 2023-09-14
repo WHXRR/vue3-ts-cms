@@ -202,7 +202,7 @@ const icons = [
           p-id="6094"
         ></path>
       </svg>
-      <span class="system-name">蜡笔小新</span>
+      <span class="system-name">{{ $t("menu.name") }}</span>
     </div>
     <a-menu
       v-model:selectedKeys="systemStore.selectedKeys"

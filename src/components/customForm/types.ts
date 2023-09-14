@@ -1,3 +1,4 @@
+import type { ComputedRef } from 'vue'
 type IFormType = 'input' | 'select' | 'datePicker' | 'radio'
 
 export interface IFormItems {
@@ -22,4 +23,6 @@ export interface IForm {
   formItems: IFormItems[]
   colStyle?: IColStyle
   formLabelCol?: any
+  submitBtnText?: string | ComputedRef<string>
+  fixed?: boolean
 }

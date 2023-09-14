@@ -5,6 +5,8 @@ import { theme } from "ant-design-vue"
 import { computed } from "vue"
 import "dayjs/locale/zh-cn"
 import dayjs from "dayjs"
+import zhCN from "ant-design-vue/es/locale/zh_CN"
+import enUS from "ant-design-vue/es/locale/en_US"
 
 dayjs.locale("zh-cn")
 const systemStore = useSystemStore()
@@ -15,6 +17,7 @@ const systemTheme = computed(() =>
 
 <template>
   <a-config-provider
+    :locale="systemStore.systemLanguage === 'zh' ? zhCN : enUS"
     :theme="{
       algorithm: systemTheme,
       token: {

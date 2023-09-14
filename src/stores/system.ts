@@ -18,6 +18,7 @@ export const useSystemStore = defineStore("system", () => {
   const currentTabs = ref('')
   const openKeys = ref<number[]>([])
   const selectedKeys = ref<number[]>([])
+  const systemLanguage = ref(useCache.getItem("cmsLang") || "zh")
 
   watch(systemHistoryRoutes, () => {
     useCache.setItem("cmsHistoryRoutes", systemHistoryRoutes.value)
@@ -57,6 +58,7 @@ export const useSystemStore = defineStore("system", () => {
     currentTabs,
     openKeys,
     selectedKeys,
+    systemLanguage,
     exit,
   }
 })

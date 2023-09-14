@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { watch, ref } from "vue"
-import locale from "ant-design-vue/es/date-picker/locale/zh_CN"
 import type { IFormItems, IColStyle } from "./types"
 import type { PropType } from "vue"
 
@@ -32,27 +31,47 @@ const props = defineProps({
       xxl: { span: 8 }
     })
   },
-  showFormBtn: {
+  submitBtnText: {
+    type: String,
+    default: ""
+  },
+  showSubmitBtn: {
     type: Boolean,
     default: true
+  },
+  showResetBtn: {
+    type: Boolean,
+    default: true
+  },
+  fixed: {
+    type: Boolean,
+    default: false
   }
 })
 
-const emit = defineEmits(["update:modelValue"])
+const emit = defineEmits(["update:modelValue", "submit", "reset"])
+const formRef = ref()
 const formData = ref({ ...props.modelValue })
 watch(
-  () => formData,
+  () => formData.value,
   (newValue) => {
-    emit("update:modelValue", newValue.value)
+    emit("update:modelValue", newValue)
   },
   {
     deep: true
   }
 )
+const submit = () => {
+  emit("submit")
+}
+const reset = () => {
+  formRef.value.resetFields()
+  emit("reset")
+}
 </script>
 <template>
-  <div class="custom-form">
-    <a-form name="basic" autocomplete="off">
+  <div :class="['custom-form', fixed ? 'fixed' : '']">
+    <a-form name="basic" autocomplete="off" :model="formData" ref="formRef">
       <a-row>
         <a-col v-bind="colStyle" v-for="(item, index) in formItems" :key="index">
           <a-form-item
@@ -77,7 +96,6 @@ watch(
             <template v-if="item.type === 'datePicker'">
               <a-range-picker
                 size="small"
-                :locale="locale"
                 v-bind="item.options"
                 v-model:value="formData[item.filed]"
               />
@@ -86,13 +104,25 @@ watch(
         </a-col>
       </a-row>
     </a-form>
-    <div class="form-btns" v-if="showFormBtn">
-      <a-button size="small" type="primary" style="margin-right: 10px">提交</a-button>
-      <a-button size="small" type="primary" ghost>重置</a-button>
+    <div class="form-btns">
+      <template v-if="showSubmitBtn">
+        <a-button size="small" type="primary" style="margin-right: 10px" @click="submit">{{
+          submitBtnText || $t("form.submit")
+        }}</a-button>
+      </template>
+      <template v-if="showResetBtn">
+        <a-button size="small" type="primary" ghost @click="reset">{{ $t("form.reset") }}</a-button>
+      </template>
+      <slot name="formBtn"></slot>
     </div>
   </div>
 </template>
 <style lang="scss" scoped>
+.fixed {
+  position: sticky;
+  top: 0;
+  z-index: 9;
+}
 .custom-form {
   padding: 20px;
   border-radius: 10px;

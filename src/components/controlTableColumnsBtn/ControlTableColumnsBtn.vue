@@ -1,29 +1,41 @@
 <script setup lang="ts">
 import Icon, { TableOutlined, RedoOutlined } from "@ant-design/icons-vue"
-import { ref, watchEffect, watch, computed } from "vue"
+import { ref, watch, computed } from "vue"
 import draggable from "vuedraggable"
 import type { PropType } from "vue"
 
 const props = defineProps({
   columns: { type: Array as PropType<any[]>, required: true },
-  tableColumns: { type: Array, required: true }
+  tableColumns: { type: Array, required: true },
+  initTableColumns: { type: Array, default: () => [] }
 })
-const emit = defineEmits(["update:tableColumns"])
+const emit = defineEmits(["update:tableColumns", "update:initTableColumns"])
 
 const dropdownVisible = ref(false)
 
 const checkboxList = ref<any[]>([])
-watchEffect(() => {
-  checkboxList.value = JSON.parse(JSON.stringify(props.columns)).map((item: any) => ({
-    ...item,
-    checked: true
-  }))
-})
+watch(
+  () => props.columns,
+  () => {
+    if (props.initTableColumns.length) {
+      checkboxList.value = JSON.parse(JSON.stringify(props.initTableColumns))
+    } else {
+      checkboxList.value = JSON.parse(JSON.stringify(props.columns)).map((item: any) => ({
+        ...item,
+        checked: true
+      }))
+    }
+  },
+  {
+    immediate: true
+  }
+)
 watch(
   () => checkboxList.value,
   (newValue) => {
-    const arr = newValue.filter((item) => item.checked)
-    emit("update:tableColumns", arr)
+    const tableColumns = newValue.filter((item) => item.checked)
+    emit("update:tableColumns", tableColumns)
+    emit("update:initTableColumns", newValue)
   },
   {
     immediate: true,
@@ -42,7 +54,7 @@ const dragging = ref(false)
 <template>
   <a-dropdown trigger="click" v-model:open="dropdownVisible">
     <a class="ant-dropdown-link" @click.prevent>
-      <a-button type="primary">
+      <a-button type="primary" size="small">
         <TableOutlined />
       </a-button>
     </a>
