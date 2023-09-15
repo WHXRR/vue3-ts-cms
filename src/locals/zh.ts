@@ -5,6 +5,7 @@ export default {
   user: {
     phone: '手机号',
     department: '部门',
+    addUser: '新增用户',
   },
   login: {
     login: '登录',
@@ -26,6 +27,7 @@ export default {
     name: '用户名',
     realname: '真实姓名',
     cellphone: '手机号',
+    password: '密码',
     enable: '状态',
     createAt: '创建时间',
     updateAt: '更新时间',
@@ -36,6 +38,7 @@ export default {
     inputRealname: '请输入真实姓名',
     inputCellphone: '请输入手机号',
     inputSelectEnable: '请选择用户状态',
+    inputPassword: '请输入密码',
     collapse: '收起',
     expand: '展开'
   }

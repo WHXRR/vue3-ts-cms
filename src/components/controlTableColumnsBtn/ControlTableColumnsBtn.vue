@@ -16,11 +16,15 @@ const dropdownVisible = ref(false)
 const checkboxList = ref<any[]>([])
 watch(
   () => props.columns,
-  () => {
+  (newValue) => {
     if (props.initTableColumns.length) {
-      checkboxList.value = JSON.parse(JSON.stringify(props.initTableColumns))
+      const arr = JSON.parse(JSON.stringify(props.initTableColumns))
+      checkboxList.value = arr.map((item: any, index: number) => ({
+        ...item,
+        title: newValue[index].title
+      }))
     } else {
-      checkboxList.value = JSON.parse(JSON.stringify(props.columns)).map((item: any) => ({
+      checkboxList.value = JSON.parse(JSON.stringify(newValue)).map((item: any) => ({
         ...item,
         checked: true
       }))

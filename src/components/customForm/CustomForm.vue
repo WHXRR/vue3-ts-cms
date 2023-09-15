@@ -49,6 +49,10 @@ const props = defineProps({
   fixed: {
     type: Boolean,
     default: false
+  },
+  showCollapsed: {
+    type: Boolean,
+    default: true
   }
 })
 
@@ -65,7 +69,9 @@ watch(
   }
 )
 const submit = () => {
-  emit("submit")
+  formRef.value.validate().then(() => {
+    emit("submit")
+  })
 }
 const reset = () => {
   formRef.value.resetFields()
@@ -88,10 +94,9 @@ const handleCollapsed = () => {
   }
 }
 onMounted(() => {
-  const formContainer = document.querySelector(".form-container") as HTMLElement
-  const formHeight = document.querySelector(".form")?.clientHeight || 0
-  const btnsHeight = document.querySelector(".form-btns")?.clientHeight || 0
-  formContainer.style.height = formHeight + btnsHeight + "px"
+  if (props.showCollapsed) {
+    handleCollapsed()
+  }
 })
 </script>
 <template>
@@ -108,6 +113,13 @@ onMounted(() => {
             >
               <template v-if="item.type === 'input'">
                 <a-input size="small" v-bind="item.options" v-model:value="formData[item.filed]" />
+              </template>
+              <template v-if="item.type === 'password'">
+                <a-input-password
+                  size="small"
+                  v-bind="item.options"
+                  v-model:value="formData[item.filed]"
+                />
               </template>
               <template v-if="item.type === 'select'">
                 <a-select size="small" v-bind="item.options" v-model:value="formData[item.filed]" />
@@ -132,19 +144,19 @@ onMounted(() => {
       </a-form>
       <div class="form-btns">
         <template v-if="showSubmitBtn">
-          <a-button size="small" type="primary" style="margin-right: 10px" @click="submit">{{
+          <a-button size="small" type="primary" @click="submit">{{
             submitBtnText || $t("form.submit")
           }}</a-button>
         </template>
         <template v-if="showResetBtn">
-          <a-button size="small" type="primary" ghost @click="reset">{{
+          <a-button size="small" type="primary" style="margin-left: 10px" ghost @click="reset">{{
             $t("form.reset")
           }}</a-button>
         </template>
         <slot name="formBtn"></slot>
       </div>
     </div>
-    <div style="text-align: right; padding-top: 10px">
+    <div style="text-align: right; padding-top: 10px" v-if="showCollapsed">
       <a-button
         size="small"
         type="link"
@@ -175,10 +187,6 @@ onMounted(() => {
   z-index: 9;
 }
 .custom-form {
-  padding: 20px 20px 10px 20px;
-  border-radius: 10px;
-  background-color: var(--background-color);
-  box-shadow: var(--box-shadow);
   .form-container {
     overflow: hidden;
     max-height: 800px;

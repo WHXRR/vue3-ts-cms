@@ -4,6 +4,7 @@ import { ControlTableColumnsBtn } from "@/components"
 import { computed, reactive, ref, watchEffect } from "vue"
 import { userListColumns, userListSearchFormItems } from "./config"
 import { useI18n } from "vue-i18n"
+import AddUser from "./components/AddUser.vue"
 import useCache from "@/utils/cache"
 import api from "@/service/api"
 import type { IForm, IFormItems } from "@/components/customForm/types"
@@ -58,14 +59,29 @@ const handleTableChange = (pag: { pageSize: number; current: number }) => {
   getUserInfo()
 }
 getUserInfo()
+
+const addUserDialog = ref(false)
 </script>
 <template>
   <div>
-    <CustomForm v-bind="formConfig" v-model="formData" @submit="getUserInfo" @reset="getUserInfo" />
+    <div class="search-form">
+      <CustomForm
+        v-bind="formConfig"
+        v-model="formData"
+        @submit="getUserInfo"
+        @reset="getUserInfo"
+      />
+    </div>
     <div class="mt-20">
       <div class="options">
-        <a-button type="primary" size="small" class="mr-10">{{ $t("form.add") }}</a-button>
-        <ControlTableColumnsBtn :columns="userListColumns" v-model:tableColumns="tableColumns" />
+        <a-button type="primary" size="small" class="mr-10" @click="addUserDialog = true">{{
+          $t("form.add")
+        }}</a-button>
+        <ControlTableColumnsBtn
+          :columns="userListColumns"
+          v-model:tableColumns="tableColumns"
+          v-model:initTableColumns="initTableColumns"
+        />
       </div>
       <a-table
         :columns="tableColumns"
@@ -97,17 +113,20 @@ getUserInfo()
         </template>
       </a-table>
     </div>
+    <AddUser v-model="addUserDialog" />
   </div>
 </template>
 <style lang="scss" scoped>
+.search-form {
+  padding: 20px 20px 10px 20px;
+  border-radius: 10px;
+  background-color: var(--background-color);
+  box-shadow: var(--box-shadow);
+}
 .mt-20 {
   margin-top: 20px;
 }
 .mr-10 {
   margin-right: 10px;
-}
-.options {
-  text-align: right;
-  margin-bottom: 10px;
 }
 </style>

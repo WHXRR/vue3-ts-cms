@@ -5,6 +5,7 @@ export default {
   user: {
     phone: 'phone',
     department: 'department',
+    addUser: 'Add User',
   },
   login: {
     login: 'Login',
@@ -27,6 +28,7 @@ export default {
     realname: 'Real Name',
     cellphone: 'Phone',
     enable: 'Status',
+    password: 'Password',
     createAt: 'Create Time',
     updateAt: 'Update Time',
     add: 'Add',
@@ -36,6 +38,7 @@ export default {
     inputRealname: 'Please Input Real Name',
     inputCellphone: 'Please Input Phone',
     inputSelectEnable: 'Please Select Status',
+    inputPassword: 'Please Input Password',
     collapse: 'Collapse',
     expand: 'Expand',
   }
