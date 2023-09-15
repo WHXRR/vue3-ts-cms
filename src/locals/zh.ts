@@ -7,6 +7,17 @@ export default {
     department: '部门',
     addUser: '新增用户',
   },
+  product: {
+    name: '商品名称',
+    address: '商品地址',
+    desc: '商品描述',
+    enable: '状态',
+    imgUrl: '商品图片',
+    newPrice: '新价格',
+    oldPrice: '原价格',
+    createAt: '创建时间',
+    updateAt: '更新时间',
+  },
   login: {
     login: '登录',
     passwordLogin: '密码登录',

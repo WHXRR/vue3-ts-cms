@@ -7,6 +7,17 @@ export default {
     department: 'department',
     addUser: 'Add User',
   },
+  product: {
+    name: 'Product Name',
+    address: 'Product Address',
+    desc: 'Product Description',
+    enable: 'Status',
+    imgUrl: 'Product Image',
+    newPrice: 'New Price',
+    oldPrice: 'Old Price',
+    createAt: 'Create Time',
+    updateAt: 'Update Time',
+  },
   login: {
     login: 'Login',
     passwordLogin: 'Password Login',
