@@ -15,7 +15,6 @@ export default defineConfig({
       promiseImportName: (i: any) => `__tla_${i}`
     })
   ],
-  base: '/vue3-ts-cms/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
