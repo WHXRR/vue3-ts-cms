@@ -40,5 +40,7 @@ async function init() {
     userStore.userID = userID
     await userStore.getUserInfo()
     await userStore.getUserMenu()
+    await userStore.getDepartmentList()
+    await userStore.getRoleList()
   }
 }

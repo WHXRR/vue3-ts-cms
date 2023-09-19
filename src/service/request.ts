@@ -1,9 +1,9 @@
 import axios from "axios"
 import NProgress from "nprogress"
 import { useSystemStore } from "@/stores/system"
+import openNotification from "@/hooks/useNotification"
 import type { AxiosInstance, InternalAxiosRequestConfig } from "axios"
 import type { requestInterceptors, requestConfig } from "./type"
-
 
 class myAxios {
   instance: AxiosInstance
@@ -36,7 +36,7 @@ class myAxios {
       const systemStore = useSystemStore()
       systemStore.loading = false
       if (error.response.status === 401) {
-        systemStore.exit()
+        // systemStore.exit()
       }
       NProgress.done()
       return error
@@ -52,9 +52,12 @@ class myAxios {
       if (config.interceptors?.requestInterceptors) {
         config = config.interceptors.requestInterceptors(config as InternalAxiosRequestConfig)
       }
-      this.instance.request<any, T>(config).then(res => {
+      this.instance.request<any, T>(config).then((res: any) => {
         if (config.interceptors?.responseInterceptors) {
           res = config.interceptors.responseInterceptors(res)
+        }
+        if (config.showTips) {
+          openNotification(res.data)
         }
         resolve(res)
       }).catch(err => {

@@ -1,6 +1,14 @@
 export default {
   menu: {
     name: 'Crayon Shin-chan',
+    menuName: 'Menu',
+    type: 'Type',
+    url: 'Route',
+    icon: 'Icon',
+    createAt: 'Create Time',
+    updateAt: 'Update Time',
+    permission: 'Button Permission',
+    action: 'Action',
   },
   user: {
     phone: 'phone',
@@ -42,6 +50,10 @@ export default {
     password: 'Password',
     createAt: 'Create Time',
     updateAt: 'Update Time',
+    department: 'Department',
+    role: 'Role',
+    intro: 'Permission Introduction',
+    leader: 'Leader',
     add: 'Add',
     start: 'open',
     disable: 'close',
@@ -50,7 +62,15 @@ export default {
     inputCellphone: 'Please Input Phone',
     inputSelectEnable: 'Please Select Status',
     inputPassword: 'Please Input Password',
+    selectDepartment: 'Please Select Department',
+    selectRole: 'Please Select Role',
     collapse: 'Collapse',
     expand: 'Expand',
+    action: 'Action',
+    edit: 'Edit',
+    delete: 'Delete',
+  },
+  notification: {
+    title: 'Notification',
   }
 }

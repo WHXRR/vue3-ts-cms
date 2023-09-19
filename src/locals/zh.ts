@@ -1,6 +1,14 @@
 export default {
   menu: {
     name: '蜡笔小新',
+    menuName: '菜单',
+    type: '类型',
+    url: '路由',
+    icon: '图标',
+    createAt: '创建时间',
+    updateAt: '更新时间',
+    permission: '按钮权限',
+    action: '操作',
   },
   user: {
     phone: '手机号',
@@ -42,6 +50,10 @@ export default {
     enable: '状态',
     createAt: '创建时间',
     updateAt: '更新时间',
+    department: '部门',
+    role: '角色',
+    intro: '权限介绍',
+    leader: '负责人',
     add: '新增',
     start: '启用',
     disable: '禁用',
@@ -50,7 +62,15 @@ export default {
     inputCellphone: '请输入手机号',
     inputSelectEnable: '请选择用户状态',
     inputPassword: '请输入密码',
+    selectDepartment: '请选择部门',
+    selectRole: '请选择角色',
     collapse: '收起',
-    expand: '展开'
-  }
+    expand: '展开',
+    action: '操作',
+    edit: '编辑',
+    delete: '删除',
+  },
+  notification: {
+    title: '通知',
+  },
 }

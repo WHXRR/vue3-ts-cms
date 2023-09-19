@@ -9,6 +9,8 @@ export const useUserInfoStore = defineStore("user", () => {
   const userID = ref(0)
   const userInfo = ref<any>({})
   const userMenus = ref<any>([])
+  const departmentList = ref<any>([])
+  const roleList = ref<any>([])
 
   function getUserInfo() {
     return api.getUserInfo(userID.value).then(res => {
@@ -26,11 +28,39 @@ export const useUserInfoStore = defineStore("user", () => {
       })
     })
   }
+  function getDepartmentList() {
+    return api.getDepartmentList({
+      offset: 0,
+      size: 100
+    }).then(res => {
+      departmentList.value = res.data.list.map(item => ({
+        ...item,
+        label: item.name,
+        value: item.id
+      }))
+    })
+  }
+  function getRoleList() {
+    return api.getRoleList({
+      offset: 0,
+      size: 100
+    }).then(res => {
+      roleList.value = res.data.list.map(item => ({
+        ...item,
+        label: item.name,
+        value: item.id
+      }))
+    })
+  }
   return {
     userID,
     userInfo,
     userMenus,
+    departmentList,
+    roleList,
     getUserInfo,
-    getUserMenu
+    getUserMenu,
+    getDepartmentList,
+    getRoleList
   }
 })

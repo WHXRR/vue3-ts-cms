@@ -21,9 +21,11 @@ export interface IColStyle {
 
 export interface IForm {
   formItems: IFormItems[]
+  formName: string
   colStyle?: IColStyle
   formLabelCol?: any
   submitBtnText?: string | ComputedRef<string>
   fixed?: boolean
   showCollapsed?: boolean
+  showResetBtn?: boolean
 }

@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { userListColumns } from "./config"
+import { roleListColumns } from "./config"
 import { reactive, ref } from "vue"
 import { ControlTableColumnsBtn } from "@/components"
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons-vue"
 import api from "@/service/api"
 
 const roleList = ref<any>([])
@@ -11,9 +12,9 @@ const pagination = reactive({
   current: 1,
   pageSize: 10
 })
-const getUserInfo = () => {
+const getRoleList = () => {
   api
-    .getUserList({
+    .getRoleList({
       offset: pagination.pageSize * pagination.current - pagination.pageSize,
       size: pagination.pageSize
     })
@@ -26,14 +27,16 @@ const getUserInfo = () => {
 const handleTableChange = (pag: { pageSize: number; current: number }) => {
   pagination.current = pag.current
   pagination.pageSize = pag.pageSize
-  getUserInfo()
+  getRoleList()
 }
-getUserInfo()
+getRoleList()
+
+const delRole = (id) => {}
 </script>
 <template>
   <div>
     <div class="options">
-      <ControlTableColumnsBtn :columns="userListColumns" v-model:tableColumns="tableColumns" />
+      <ControlTableColumnsBtn :columns="roleListColumns" v-model:tableColumns="tableColumns" />
     </div>
     <a-table
       :columns="tableColumns"
@@ -61,6 +64,15 @@ getUserInfo()
           <span>
             {{ $filters.formatTime(record[column.dataIndex]) }}
           </span>
+        </template>
+        <template v-if="['action'].includes(column.dataIndex)">
+          <a-space wrap>
+            <a-button size="small" type="link"><EditOutlined />{{ $t("form.edit") }}</a-button>
+            <a-button size="small" type="link" danger @click="delRole(record.id)">
+              <DeleteOutlined />
+              {{ $t("form.delete") }}</a-button
+            >
+          </a-space>
         </template>
       </template>
     </a-table>

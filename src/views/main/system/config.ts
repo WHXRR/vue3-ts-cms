@@ -39,6 +39,122 @@ const userListColumns = computed(() => [
     title: t("form.updateAt"),
     dataIndex: "updateAt",
     align: "center"
+  },
+  {
+    title: t("form.action"),
+    dataIndex: "action",
+    align: "center"
+  }
+]
+)
+const roleListColumns = computed(() => [
+  {
+    title: "#",
+    width: 40,
+    dataIndex: "index",
+    align: "center"
+  },
+  {
+    title: t("form.name"),
+    dataIndex: "name",
+    align: "center"
+  },
+  {
+    title: t("form.intro"),
+    dataIndex: "intro",
+    align: "center"
+  },
+  {
+    title: t("form.createAt"),
+    dataIndex: "createAt",
+    align: "center"
+  },
+  {
+    title: t("form.updateAt"),
+    dataIndex: "updateAt",
+    align: "center"
+  },
+  {
+    title: t("form.action"),
+    dataIndex: "action",
+    align: "center"
+  }
+]
+)
+const departmentListColumns = computed(() => [
+  {
+    title: "#",
+    width: 40,
+    dataIndex: "index",
+    align: "center"
+  },
+  {
+    title: t("form.name"),
+    dataIndex: "name",
+    align: "center"
+  },
+  {
+    title: t("form.leader"),
+    dataIndex: "leader",
+    align: "center"
+  },
+  {
+    title: t("form.createAt"),
+    dataIndex: "createAt",
+    align: "center"
+  },
+  {
+    title: t("form.updateAt"),
+    dataIndex: "updateAt",
+    align: "center"
+  },
+  {
+    title: t("form.action"),
+    dataIndex: "action",
+    align: "center"
+  }
+]
+)
+const menuListColumns = computed(() => [
+  {
+    title: t("menu.menuName"),
+    dataIndex: "name",
+    align: "center"
+  },
+  {
+    title: t("menu.type"),
+    dataIndex: "type",
+    align: "center"
+  },
+  {
+    title: t("menu.url"),
+    dataIndex: "url",
+    align: "center"
+  },
+  {
+    title: t("menu.icon"),
+    dataIndex: "icon",
+    align: "center"
+  },
+  {
+    title: t("menu.createAt"),
+    dataIndex: "createAt",
+    align: "center"
+  },
+  {
+    title: t("menu.updateAt"),
+    dataIndex: "updateAt",
+    align: "center"
+  },
+  {
+    title: t("menu.permission"),
+    dataIndex: "permission",
+    align: "center"
+  },
+  {
+    title: t("menu.action"),
+    dataIndex: "action",
+    align: "center"
   }
 ]
 )
@@ -99,5 +215,8 @@ const userListSearchFormItems = computed<IFormItems[]>(() => [
 ])
 export {
   userListColumns,
+  menuListColumns,
+  roleListColumns,
+  departmentListColumns,
   userListSearchFormItems
 }

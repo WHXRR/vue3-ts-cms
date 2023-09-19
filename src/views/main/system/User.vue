@@ -2,6 +2,7 @@
 import { CustomForm } from "@/components"
 import { ControlTableColumnsBtn } from "@/components"
 import { computed, reactive, ref, watchEffect } from "vue"
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons-vue"
 import { userListColumns, userListSearchFormItems } from "./config"
 import { useI18n } from "vue-i18n"
 import AddUser from "./components/AddUser.vue"
@@ -12,6 +13,7 @@ import type { IForm, IFormItems } from "@/components/customForm/types"
 const { t } = useI18n()
 const btnText = computed(() => t("form.search"))
 const formConfig = ref<IForm>({
+  formName: "userList",
   formItems: userListSearchFormItems as unknown as IFormItems[],
   formLabelCol: {
     sm: { span: 8 }
@@ -60,6 +62,13 @@ const handleTableChange = (pag: { pageSize: number; current: number }) => {
 }
 getUserInfo()
 
+const delUser = (id: number) => {
+  api.delUser(id).then((res) => {
+    if (!res.code) {
+      getUserInfo()
+    }
+  })
+}
 const addUserDialog = ref(false)
 </script>
 <template>
@@ -109,6 +118,15 @@ const addUserDialog = ref(false)
             <span>
               {{ $filters.formatTime(record[column.dataIndex]) }}
             </span>
+          </template>
+          <template v-if="['action'].includes(column.dataIndex)">
+            <a-space wrap>
+              <a-button size="small" type="link"><EditOutlined />{{ $t("form.edit") }}</a-button>
+              <a-button size="small" type="link" danger @click="delUser(record.id)">
+                <DeleteOutlined />
+                {{ $t("form.delete") }}</a-button
+              >
+            </a-space>
           </template>
         </template>
       </a-table>

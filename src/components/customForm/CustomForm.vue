@@ -11,6 +11,10 @@ const props = defineProps({
     type: Object,
     required: true
   },
+  formName: {
+    type: String,
+    required: true
+  },
   formItems: {
     type: Object as PropType<IFormItems[]>,
     default: () => {},
@@ -70,6 +74,8 @@ watch(
 )
 const submit = () => {
   formRef.value.validate().then(() => {
+    console.log(11)
+
     emit("submit")
   })
 }
@@ -102,7 +108,7 @@ onMounted(() => {
 <template>
   <div :class="['custom-form', fixed ? 'fixed' : '']">
     <div class="form-container">
-      <a-form class="form" name="basic" autocomplete="off" :model="formData" ref="formRef">
+      <a-form class="form" :name="formName" autocomplete="off" :model="formData" ref="formRef">
         <a-row>
           <a-col class="form-col" v-bind="colStyle" v-for="(item, index) in formItems" :key="index">
             <a-form-item

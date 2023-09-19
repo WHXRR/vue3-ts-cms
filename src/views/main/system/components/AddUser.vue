@@ -2,7 +2,7 @@
 import { ref, computed } from "vue"
 import { CustomForm } from "@/components"
 import { userFormItems } from "./config"
-import type { IForm } from "@/components/customForm/types"
+import type { IForm, IFormItems } from "@/components/customForm/types"
 
 const props = defineProps({
   modelValue: {
@@ -24,12 +24,15 @@ const formData = ref({
   name: "",
   realname: "",
   cellphone: "",
-  password: ""
+  password: "",
+  departmentId: "",
+  roleId: ""
 })
 const formConfig = ref<IForm>({
   formItems: userFormItems as unknown as IFormItems[],
+  formName: "user",
   colStyle: {
-    sm: { span: 24 }
+    sm: 24
   },
   showCollapsed: false,
   showResetBtn: false
