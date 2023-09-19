@@ -31,7 +31,9 @@ const handleTableChange = (pag: { pageSize: number; current: number }) => {
 }
 getDepartmentList()
 
-const delDepartment = (id) => {}
+const delDepartment = (id: number) => {
+  console.log(id)
+}
 </script>
 <template>
   <div>

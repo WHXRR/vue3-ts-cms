@@ -31,7 +31,9 @@ const handleTableChange = (pag: { pageSize: number; current: number }) => {
 }
 getRoleList()
 
-const delRole = (id) => {}
+const delRole = (id: number) => {
+  console.log(id)
+}
 </script>
 <template>
   <div>

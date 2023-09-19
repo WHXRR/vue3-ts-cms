@@ -30,7 +30,7 @@ const getMenuList = () => {
 }
 getMenuList()
 
-const delMenu = (id) => {
+const delMenu = (id: number) => {
   console.log(id)
 }
 </script>
