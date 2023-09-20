@@ -43,7 +43,9 @@ const submit = async () => {
 </script>
 <template>
   <div class="login-container">
-    <div class="login-left"></div>
+    <div class="login-left">
+      <img class="login-img" src="/login.png" alt="" />
+    </div>
     <div class="login-right">
       <div class="login-box">
         <a-tabs v-model:activeKey="activeKey" centered>
@@ -73,14 +75,19 @@ const submit = async () => {
 <style lang="scss" scoped>
 .login-container {
   height: 100%;
-  display: grid;
-  grid-template-columns: 50% 50%;
-  align-items: center;
+  display: flex;
   .login-left {
+    width: 50%;
     height: 100%;
     background-image: linear-gradient(#ffffff, #ffffff);
+    .login-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
   .login-right {
+    width: 50%;
     height: 100%;
     display: flex;
     align-items: center;
@@ -110,7 +117,10 @@ const submit = async () => {
 }
 @media (max-width: 768px) {
   .login-container {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+  .login-right {
+    width: 100% !important;
   }
   .login-left {
     display: none;

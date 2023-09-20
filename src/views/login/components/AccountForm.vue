@@ -4,8 +4,8 @@ import useCache from "@/utils/cache"
 
 const accountFormRef = ref()
 const accountFormState = ref({
-  name: useCache.getItem("cmsAccount") ?? "",
-  password: useCache.getItem("cmsPassword") ?? ""
+  name: useCache.getItem("cmsAccount") ?? "coderwhy",
+  password: useCache.getItem("cmsPassword") ?? "123456"
 })
 
 const validateForm = () => {
