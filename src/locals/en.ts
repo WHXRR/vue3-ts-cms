@@ -14,6 +14,7 @@ export default {
     phone: 'phone',
     department: 'department',
     addUser: 'Add User',
+    editUser: 'Edit User',
   },
   product: {
     name: 'Product Name',

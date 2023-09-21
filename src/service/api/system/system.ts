@@ -3,6 +3,7 @@ import type { IDataType, IUserListType } from "./types"
 
 enum SystemURL {
   UserList = '/users/list',
+  AddUser = 'users',
   DelUser = '/users/',
   RoleList = '/role/list',
   MenuList = '/menu/list',
@@ -20,6 +21,24 @@ export function getUserList(queryInfo: any) {
 export function delUser(id: number) {
   return api.delete<IDataType<IUserListType>>({
     url: SystemURL.DelUser + id,
+    showLoading: true,
+    showTips: true
+  })
+}
+
+export function addUser(Info: any) {
+  return api.post<IDataType<IUserListType>>({
+    url: SystemURL.AddUser,
+    data: Info,
+    showLoading: true,
+    showTips: true
+  })
+}
+
+export function editUser(Info: any, id: number) {
+  return api.patch<IDataType<IUserListType>>({
+    url: SystemURL.AddUser + `/${id}`,
+    data: Info,
     showLoading: true,
     showTips: true
   })

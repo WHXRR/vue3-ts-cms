@@ -74,8 +74,6 @@ watch(
 )
 const submit = () => {
   formRef.value.validate().then(() => {
-    console.log(11)
-
     emit("submit")
   })
 }
@@ -104,6 +102,10 @@ onMounted(() => {
     handleCollapsed()
   }
 })
+
+defineExpose({
+  reset
+})
 </script>
 <template>
   <div :class="['custom-form', fixed ? 'fixed' : '']">
@@ -116,6 +118,7 @@ onMounted(() => {
               :name="item.name"
               :rules="item.rules"
               :labelCol="formLabelCol"
+              v-if="!item.hidden"
             >
               <template v-if="item.type === 'input'">
                 <a-input size="small" v-bind="item.options" v-model:value="formData[item.filed]" />

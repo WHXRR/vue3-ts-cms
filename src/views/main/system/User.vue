@@ -42,7 +42,7 @@ const pagination = reactive({
   current: 1,
   pageSize: 10
 })
-const getUserInfo = () => {
+const getUserList = () => {
   api
     .getUserList({
       offset: pagination.pageSize * pagination.current - pagination.pageSize,
@@ -58,18 +58,31 @@ const getUserInfo = () => {
 const handleTableChange = (pag: { pageSize: number; current: number }) => {
   pagination.current = pag.current
   pagination.pageSize = pag.pageSize
-  getUserInfo()
+  getUserList()
 }
-getUserInfo()
+getUserList()
 
 const delUser = (id: number) => {
   api.delUser(id).then((res) => {
     if (!res.code) {
-      getUserInfo()
+      getUserList()
     }
   })
 }
+
 const addUserDialog = ref(false)
+const dialogTitle = ref("")
+const addUser = () => {
+  addUserDialog.value = true
+  dialogTitle.value = t("user.addUser")
+  userInfo.value = {}
+}
+const userInfo = ref({})
+const editUser = (data: any) => {
+  addUserDialog.value = true
+  dialogTitle.value = t("user.editUser")
+  userInfo.value = data
+}
 </script>
 <template>
   <div>
@@ -77,13 +90,13 @@ const addUserDialog = ref(false)
       <CustomForm
         v-bind="formConfig"
         v-model="formData"
-        @submit="getUserInfo"
-        @reset="getUserInfo"
+        @submit="getUserList"
+        @reset="getUserList"
       />
     </div>
     <div class="mt-20">
       <div class="options">
-        <a-button type="primary" size="small" class="mr-10" @click="addUserDialog = true">{{
+        <a-button type="primary" size="small" class="mr-10" @click="addUser">{{
           $t("form.add")
         }}</a-button>
         <ControlTableColumnsBtn
@@ -121,7 +134,9 @@ const addUserDialog = ref(false)
           </template>
           <template v-if="['action'].includes(column.dataIndex)">
             <a-space wrap>
-              <a-button size="small" type="link"><EditOutlined />{{ $t("form.edit") }}</a-button>
+              <a-button size="small" type="link" @click="editUser(record)"
+                ><EditOutlined />{{ $t("form.edit") }}</a-button
+              >
               <a-button size="small" type="link" danger @click="delUser(record.id)">
                 <DeleteOutlined />
                 {{ $t("form.delete") }}</a-button
@@ -131,7 +146,12 @@ const addUserDialog = ref(false)
         </template>
       </a-table>
     </div>
-    <AddUser v-model="addUserDialog" />
+    <AddUser
+      v-model="addUserDialog"
+      @getList="getUserList"
+      :title="dialogTitle"
+      :userInfo="userInfo"
+    />
   </div>
 </template>
 <style lang="scss" scoped>

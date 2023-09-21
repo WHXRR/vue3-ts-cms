@@ -58,6 +58,9 @@ class myAxios {
         }
         if (config.showTips) {
           openNotification(res.data)
+          if (res.code) {
+            reject(res)
+          }
         }
         resolve(res)
       }).catch(err => {

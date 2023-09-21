@@ -14,6 +14,7 @@ export default {
     phone: '手机号',
     department: '部门',
     addUser: '新增用户',
+    editUser: '编辑用户'
   },
   product: {
     name: '商品名称',

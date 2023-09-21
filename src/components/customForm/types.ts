@@ -8,6 +8,7 @@ export interface IFormItems {
   name?: string
   rules?: any[]
   options?: any
+  hidden?: boolean
 }
 
 export interface IColStyle {
