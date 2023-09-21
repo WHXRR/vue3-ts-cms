@@ -205,12 +205,26 @@ const userListSearchFormItems = computed<IFormItems[]>(() => [
         }
       ]
     }
+  }
+])
+const roleListSearchFormItems = computed<IFormItems[]>(() => [
+  {
+    filed: "name",
+    type: "input",
+    name: "name",
+    label: t("form.name"),
+    options: {
+      placeholder: t("form.inputName")
+    }
   },
   {
-    filed: "createAt",
-    type: "datePicker",
-    name: "createAt",
-    label: t("form.createAt"),
+    filed: "intro",
+    type: "input",
+    name: "intro",
+    label: t("form.intro"),
+    options: {
+      placeholder: t("form.inputIntro")
+    }
   }
 ])
 export {
@@ -218,5 +232,6 @@ export {
   menuListColumns,
   roleListColumns,
   departmentListColumns,
-  userListSearchFormItems
+  userListSearchFormItems,
+  roleListSearchFormItems
 }

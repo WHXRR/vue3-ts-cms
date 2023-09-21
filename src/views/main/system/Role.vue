@@ -1,9 +1,25 @@
 <script setup lang="ts">
-import { roleListColumns } from "./config"
+import { roleListSearchFormItems, roleListColumns } from "./config"
 import { reactive, ref } from "vue"
-import { ControlTableColumnsBtn } from "@/components"
+import { ControlTableColumnsBtn, CustomForm } from "@/components"
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons-vue"
+import { useI18n } from "vue-i18n"
+import AddRole from "./components/AddRole.vue"
 import api from "@/service/api"
+import type { IForm, IFormItems } from "@/components/customForm/types"
+
+const { t } = useI18n()
+const formConfig = ref<IForm>({
+  formName: "roleList",
+  formItems: roleListSearchFormItems as unknown as IFormItems[],
+  formLabelCol: {
+    sm: { span: 8 }
+  }
+})
+const formData = ref({
+  name: "",
+  intro: ""
+})
 
 const roleList = ref<any>([])
 const tableColumns = ref<any[]>([])
@@ -16,7 +32,8 @@ const getRoleList = () => {
   api
     .getRoleList({
       offset: pagination.pageSize * pagination.current - pagination.pageSize,
-      size: pagination.pageSize
+      size: pagination.pageSize,
+      ...formData.value
     })
     .then((res) => {
       const { list, totalCount } = res.data
@@ -31,53 +48,84 @@ const handleTableChange = (pag: { pageSize: number; current: number }) => {
 }
 getRoleList()
 
+const dialog = ref(false)
+const dialogTitle = ref("")
+const info = ref({})
+const addRole = () => {
+  dialog.value = true
+  dialogTitle.value = t("role.addRole")
+  info.value = {}
+}
 const delRole = (id: number) => {
-  console.log(id)
+  api.delRole(id).then(() => {
+    getRoleList()
+  })
+}
+const editRole = (data: any) => {
+  dialog.value = true
+  dialogTitle.value = t("role.editRole")
+  info.value = data
 }
 </script>
 <template>
   <div>
-    <div class="options">
-      <ControlTableColumnsBtn :columns="roleListColumns" v-model:tableColumns="tableColumns" />
+    <div class="search-form">
+      <CustomForm
+        v-bind="formConfig"
+        v-model="formData"
+        @submit="getRoleList"
+        @reset="getRoleList"
+      />
     </div>
-    <a-table
-      :columns="tableColumns"
-      :dataSource="roleList"
-      :pagination="pagination"
-      :scroll="{ x: 'max-content' }"
-      @change="handleTableChange"
-    >
-      <template #bodyCell="{ column, record, index }">
-        <template v-if="column.dataIndex === 'index'">
-          {{ index + 1 }}
+    <div class="mt-20">
+      <div class="options">
+        <a-button class="mr-10" type="primary" size="small" @click="addRole">{{
+          $t("form.add")
+        }}</a-button>
+        <ControlTableColumnsBtn :columns="roleListColumns" v-model:tableColumns="tableColumns" />
+      </div>
+      <a-table
+        :columns="tableColumns"
+        :dataSource="roleList"
+        :pagination="pagination"
+        :scroll="{ x: 'max-content' }"
+        @change="handleTableChange"
+      >
+        <template #bodyCell="{ column, record, index }">
+          <template v-if="column.dataIndex === 'index'">
+            {{ index + 1 }}
+          </template>
+          <template v-if="column.dataIndex === 'enable'">
+            <span>
+              <a-switch
+                :checked-children="$t('form.start')"
+                :un-checked-children="$t('form.disable')"
+                :checkedValue="1"
+                :unCheckedValue="0"
+                v-model:checked="record.enable"
+              />
+            </span>
+          </template>
+          <template v-if="['createAt', 'updateAt'].includes(column.dataIndex)">
+            <span>
+              {{ $filters.formatTime(record[column.dataIndex]) }}
+            </span>
+          </template>
+          <template v-if="['action'].includes(column.dataIndex)">
+            <a-space wrap>
+              <a-button size="small" type="link" @click="editRole(record)"
+                ><EditOutlined />{{ $t("form.edit") }}</a-button
+              >
+              <a-button size="small" type="link" danger @click="delRole(record.id)">
+                <DeleteOutlined />
+                {{ $t("form.delete") }}</a-button
+              >
+            </a-space>
+          </template>
         </template>
-        <template v-if="column.dataIndex === 'enable'">
-          <span>
-            <a-switch
-              :checked-children="$t('form.start')"
-              :un-checked-children="$t('form.disable')"
-              :checkedValue="1"
-              :unCheckedValue="0"
-              v-model:checked="record.enable"
-            />
-          </span>
-        </template>
-        <template v-if="['createAt', 'updateAt'].includes(column.dataIndex)">
-          <span>
-            {{ $filters.formatTime(record[column.dataIndex]) }}
-          </span>
-        </template>
-        <template v-if="['action'].includes(column.dataIndex)">
-          <a-space wrap>
-            <a-button size="small" type="link"><EditOutlined />{{ $t("form.edit") }}</a-button>
-            <a-button size="small" type="link" danger @click="delRole(record.id)">
-              <DeleteOutlined />
-              {{ $t("form.delete") }}</a-button
-            >
-          </a-space>
-        </template>
-      </template>
-    </a-table>
+      </a-table>
+    </div>
+    <AddRole v-model="dialog" :title="dialogTitle" :info="info" @getList="getRoleList" />
   </div>
 </template>
 <style lang="scss" scoped></style>

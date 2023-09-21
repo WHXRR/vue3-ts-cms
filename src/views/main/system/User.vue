@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { CustomForm } from "@/components"
-import { ControlTableColumnsBtn } from "@/components"
+import { ControlTableColumnsBtn, CustomForm } from "@/components"
 import { computed, reactive, ref, watchEffect } from "vue"
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons-vue"
 import { userListColumns, userListSearchFormItems } from "./config"
@@ -18,8 +17,7 @@ const formConfig = ref<IForm>({
   formLabelCol: {
     sm: { span: 8 }
   },
-  submitBtnText: btnText,
-  fixed: true
+  submitBtnText: btnText
 })
 const formData = ref({
   name: "",
@@ -154,17 +152,4 @@ const editUser = (data: any) => {
     />
   </div>
 </template>
-<style lang="scss" scoped>
-.search-form {
-  padding: 20px 20px 10px 20px;
-  border-radius: 10px;
-  background-color: var(--background-color);
-  box-shadow: var(--box-shadow);
-}
-.mt-20 {
-  margin-top: 20px;
-}
-.mr-10 {
-  margin-right: 10px;
-}
-</style>
+<style lang="scss" scoped></style>

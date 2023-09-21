@@ -70,6 +70,29 @@ const userFormItems = computed<IFormItems[]>(() => [
     }
   },
 ])
+const roleFormItems = computed<IFormItems[]>(() => [
+  {
+    filed: "name",
+    type: "input",
+    name: "name",
+    label: t("form.name"),
+    rules: [{ required: true, message: t("form.inputName") }],
+    options: {
+      placeholder: t("form.inputName")
+    }
+  },
+  {
+    filed: "intro",
+    type: "input",
+    name: "intro",
+    label: t("form.intro"),
+    rules: [{ required: true, message: t("form.inputIntro") }],
+    options: {
+      placeholder: t("form.inputIntro")
+    }
+  }
+])
 export {
-  userFormItems
+  userFormItems,
+  roleFormItems
 }

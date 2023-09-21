@@ -16,6 +16,10 @@ export default {
     addUser: '新增用户',
     editUser: '编辑用户'
   },
+  role: {
+    addRole: '新增角色',
+    editRole: '编辑角色'
+  },
   product: {
     name: '商品名称',
     address: '商品地址',
@@ -63,6 +67,7 @@ export default {
     inputCellphone: '请输入手机号',
     inputSelectEnable: '请选择用户状态',
     inputPassword: '请输入密码',
+    inputIntro: '请输入权限介绍',
     selectDepartment: '请选择部门',
     selectRole: '请选择角色',
     collapse: '收起',
@@ -70,6 +75,7 @@ export default {
     action: '操作',
     edit: '编辑',
     delete: '删除',
+    selectIntro: '请选择权限',
   },
   notification: {
     title: '通知',

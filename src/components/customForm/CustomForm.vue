@@ -104,11 +104,12 @@ onMounted(() => {
 })
 
 defineExpose({
+  submit,
   reset
 })
 </script>
 <template>
-  <div :class="['custom-form', fixed ? 'fixed' : '']">
+  <div class="custom-form">
     <div class="form-container">
       <a-form class="form" :name="formName" autocomplete="off" :model="formData" ref="formRef">
         <a-row>

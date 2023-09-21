@@ -11,6 +11,7 @@ const openNotification = (description: string, title: string = t('notification.t
   notification.open({
     message: title,
     description,
+    duration: 2,
     icon: () => h(NotificationOutlined, { style: 'color: ' + systemStore.systemThemeColor.color }),
   });
 };

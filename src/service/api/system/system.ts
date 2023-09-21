@@ -6,6 +6,7 @@ enum SystemURL {
   AddUser = 'users',
   DelUser = '/users/',
   RoleList = '/role/list',
+  Role = '/role',
   MenuList = '/menu/list',
   DepartmentList = '/department/list',
 }
@@ -49,6 +50,32 @@ export function getRoleList(queryInfo: any) {
     url: SystemURL.RoleList,
     data: queryInfo,
     showLoading: true
+  })
+}
+
+export function addRole(Info: any) {
+  return api.post<IDataType<IUserListType>>({
+    url: SystemURL.Role,
+    data: Info,
+    showLoading: true,
+    showTips: true
+  })
+}
+
+export function editRole(Info: any, id: number) {
+  return api.patch<IDataType<IUserListType>>({
+    url: SystemURL.Role + `/${id}`,
+    data: Info,
+    showLoading: true,
+    showTips: true
+  })
+}
+
+export function delRole(id: number) {
+  return api.delete<IDataType<IUserListType>>({
+    url: SystemURL.Role + `/${id}`,
+    showLoading: true,
+    showTips: true
   })
 }
 

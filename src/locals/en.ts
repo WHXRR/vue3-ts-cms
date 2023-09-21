@@ -16,6 +16,10 @@ export default {
     addUser: 'Add User',
     editUser: 'Edit User',
   },
+  role: {
+    addRole: 'Add Role',
+    editRole: 'Edit Role',
+  },
   product: {
     name: 'Product Name',
     address: 'Product Address',
@@ -63,6 +67,7 @@ export default {
     inputCellphone: 'Please Input Phone',
     inputSelectEnable: 'Please Select Status',
     inputPassword: 'Please Input Password',
+    inputIntro: 'Please Input Permission Introduction',
     selectDepartment: 'Please Select Department',
     selectRole: 'Please Select Role',
     collapse: 'Collapse',
@@ -70,6 +75,7 @@ export default {
     action: 'Action',
     edit: 'Edit',
     delete: 'Delete',
+    selectIntro: 'Please Select Permission',
   },
   notification: {
     title: 'Notification',

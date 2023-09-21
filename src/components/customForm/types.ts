@@ -29,4 +29,5 @@ export interface IForm {
   fixed?: boolean
   showCollapsed?: boolean
   showResetBtn?: boolean
+  showSubmitBtn?: boolean
 }
