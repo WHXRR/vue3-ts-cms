@@ -9,6 +9,8 @@ export default {
     updateAt: '更新时间',
     permission: '按钮权限',
     action: '操作',
+    closeAll: '关闭所有',
+    closeOther: '关闭其他'
   },
   user: {
     phone: '手机号',
@@ -40,6 +42,7 @@ export default {
     rememberPassword: '记住密码',
     userName: '账号',
     password: '密码',
+    code: '验证码',
     pleaseInputAccount: '请输入账号!',
     pleaseInputPassword: '请输入密码!',
     pleaseInputPhone: '请输入手机号!',
@@ -82,4 +85,7 @@ export default {
   notification: {
     title: '通知',
   },
+  analysis: {
+    categoryCount: '类目统计',
+  }
 }

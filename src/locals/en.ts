@@ -9,6 +9,8 @@ export default {
     updateAt: 'Update Time',
     permission: 'Button Permission',
     action: 'Action',
+    closeAll: 'Close All',
+    closeOther: 'Close Other',
   },
   user: {
     phone: 'phone',
@@ -40,6 +42,7 @@ export default {
     rememberPassword: 'Remember Password',
     userName: 'Account',
     password: 'Password',
+    code: 'Code',
     pleaseInputAccount: 'Please Input Account!',
     pleaseInputPassword: 'Please Input Password!',
     pleaseInputPhone: 'Please Input Phone!',
@@ -81,5 +84,8 @@ export default {
   },
   notification: {
     title: 'Notification',
+  },
+  analysis: {
+    categoryCount: 'Category Count',
   }
 }

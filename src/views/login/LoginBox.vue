@@ -53,22 +53,24 @@ const submit = async () => {
           <a-tab-pane key="1">
             <template #tab>
               <UserOutlined />
-              <span> 密码登录 </span>
+              <span> {{ $t("login.passwordLogin") }} </span>
             </template>
             <AccountForm ref="accountFormRef" @handleLogin="submit" />
           </a-tab-pane>
           <a-tab-pane key="2">
             <template #tab>
               <PhoneOutlined />
-              <span> 手机号登录 </span>
+              <span> {{ $t("login.phoneLogin") }} </span>
             </template>
             <PhoneForm ref="phoneFormRef" />
           </a-tab-pane>
         </a-tabs>
         <div class="remember-password">
-          <a-checkbox v-model:checked="checked">记住密码</a-checkbox>
+          <a-checkbox v-model:checked="checked">{{ $t("login.rememberPassword") }}</a-checkbox>
         </div>
-        <a-button class="submit-btn" type="primary" @click="submit">登录</a-button>
+        <a-button class="submit-btn" type="primary" @click="submit">{{
+          $t("login.login")
+        }}</a-button>
       </div>
     </div>
   </div>

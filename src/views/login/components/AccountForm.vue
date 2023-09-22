@@ -39,10 +39,18 @@ defineExpose({
     :wrapper-col="{ span: 18 }"
     autocomplete="off"
   >
-    <a-form-item label="账号" name="name" :rules="[{ required: true, message: '请输入账号!' }]">
+    <a-form-item
+      :label="$t('login.userName')"
+      name="name"
+      :rules="[{ required: true, message: $t('login.pleaseInputAccount') }]"
+    >
       <a-input v-model:value="accountFormState.name" />
     </a-form-item>
-    <a-form-item label="密码" name="password" :rules="[{ required: true, message: '请输入密码!' }]">
+    <a-form-item
+      :label="$t('login.password')"
+      name="password"
+      :rules="[{ required: true, message: $t('login.pleaseInputPassword') }]"
+    >
       <a-input-password v-model:value="accountFormState.password" @keydown.enter="handleLogin" />
     </a-form-item>
   </a-form>

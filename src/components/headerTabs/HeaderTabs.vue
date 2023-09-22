@@ -62,10 +62,10 @@ const closeOther = () => {
           <template #overlay>
             <a-menu>
               <a-menu-item>
-                <a href="javascript:;" @click="closeAll">关闭所有</a>
+                <a href="javascript:;" @click="closeAll">{{ $t("menu.closeAll") }}</a>
               </a-menu-item>
               <a-menu-item>
-                <a href="javascript:;" @click="closeOther">关闭其他</a>
+                <a href="javascript:;" @click="closeOther">{{ $t("menu.closeOther") }}</a>
               </a-menu-item>
             </a-menu>
           </template>
