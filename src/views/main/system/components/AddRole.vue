@@ -40,6 +40,7 @@ const formConfig = ref<IForm>({
   colStyle: {
     sm: 24
   },
+  formLabelCol: { span: 4 },
   showCollapsed: false,
   showResetBtn: false,
   showSubmitBtn: false
@@ -58,6 +59,7 @@ watch(
   (newValue) => {
     if (props.info.id) {
       checkedKeys.value = mapToMenuChildID(newValue.menuList)
+      console.log(checkedKeys.value)
     } else {
       checkedKeys.value = []
     }

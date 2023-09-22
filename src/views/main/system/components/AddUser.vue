@@ -54,6 +54,7 @@ const formConfig = ref<IForm>({
   colStyle: {
     sm: 24
   },
+  formLabelCol: { span: 4 },
   showCollapsed: false,
   showResetBtn: false
 })

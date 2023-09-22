@@ -1,12 +1,15 @@
-const result: any[] = []
 function mapToMenuChildID(menu: any) {
-  for (const subMenu of menu) {
-    if (subMenu.children) {
-      mapToMenuChildID(subMenu.children)
-    } else {
-      result.push(subMenu.id)
+  const result: any[] = []
+  function _mapChild(child) {
+    for (const subMenu of child) {
+      if (subMenu.children) {
+        _mapChild(subMenu.children)
+      } else {
+        result.push(subMenu.id)
+      }
     }
   }
+  _mapChild(menu)
   return result
 }
 
