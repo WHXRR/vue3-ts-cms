@@ -59,7 +59,6 @@ watch(
   (newValue) => {
     if (props.info.id) {
       checkedKeys.value = mapToMenuChildID(newValue.menuList)
-      console.log(checkedKeys.value)
     } else {
       checkedKeys.value = []
     }

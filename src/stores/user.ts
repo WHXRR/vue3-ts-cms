@@ -1,9 +1,12 @@
 import { defineStore } from "pinia";
+import { useSystemStore } from "@/stores/system"
 import { ref } from "vue";
 import router from "@/router"
 import useCache from "@/utils/cache"
 import getUserMenuFn from "@/router/mapRoutes"
 import api from "@/service/api"
+import openNotification from "@/hooks/useNotification"
+
 
 export const useUserInfoStore = defineStore("user", () => {
   const userID = ref(0)
@@ -19,13 +22,19 @@ export const useUserInfoStore = defineStore("user", () => {
     })
   }
   function getUserMenu() {
+    const systemStore = useSystemStore()
     return api.getUserMenu(userID.value).then(async res => {
-      userMenus.value = res.data
-      useCache.setItem("cmsUserMenus", res.data)
-      const routes = await getUserMenuFn(res.data)
-      routes.forEach(route => {
-        router.addRoute('main', route)
-      })
+      if (!res.data || !res.data.length) {
+        systemStore.exit()
+        openNotification('用户菜单为空')
+      } else {
+        userMenus.value = res.data
+        useCache.setItem("cmsUserMenus", res.data)
+        const routes = await getUserMenuFn(res.data)
+        routes.forEach(route => {
+          router.addRoute('main', route)
+        })
+      }
     })
   }
   function getDepartmentList() {

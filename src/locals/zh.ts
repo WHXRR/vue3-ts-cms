@@ -13,8 +13,10 @@ export default {
   user: {
     phone: '手机号',
     department: '部门',
+    authority: '权限',
     addUser: '新增用户',
-    editUser: '编辑用户'
+    editUser: '编辑用户',
+    exit: '退出'
   },
   role: {
     addRole: '新增角色',

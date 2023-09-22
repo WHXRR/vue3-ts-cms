@@ -82,7 +82,6 @@ export function delRole(id: number) {
 export function getMenuList() {
   return api.post<IDataType<IUserListType>>({
     url: SystemURL.MenuList,
-    showLoading: true
   })
 }
 
@@ -90,6 +89,5 @@ export function getDepartmentList(queryInfo: any) {
   return api.post<IDataType<IUserListType>>({
     url: SystemURL.DepartmentList,
     data: queryInfo,
-    showLoading: true
   })
 }

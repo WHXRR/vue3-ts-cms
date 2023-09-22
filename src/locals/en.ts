@@ -13,8 +13,10 @@ export default {
   user: {
     phone: 'phone',
     department: 'department',
+    authority: 'authority',
     addUser: 'Add User',
     editUser: 'Edit User',
+    exit: 'Exit',
   },
   role: {
     addRole: 'Add Role',

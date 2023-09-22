@@ -1,21 +1,15 @@
 <script setup lang="ts">
 import { useUserInfoStore } from "@/stores/user"
+import { useSystemStore } from "@/stores/system"
 const userInfoStore = useUserInfoStore()
+const systemStore = useSystemStore()
+const exit = () => {
+  systemStore.exit()
+}
 </script>
 <template>
   <div class="user-info">
-    <a-popover placement="bottom">
-      <template #content>
-        <p style="margin-bottom: 5px">
-          {{ $t("user.phone") }}：{{ userInfoStore.userInfo.cellphone }}
-        </p>
-        <p style="margin-bottom: 5px">
-          {{ $t("user.department") }} ：{{ userInfoStore.userInfo.department.name }}
-        </p>
-      </template>
-      <template #title>
-        <span>{{ userInfoStore.userInfo.role.name }}</span>
-      </template>
+    <a-dropdown placement="bottom">
       <div class="user-menu">
         <svg
           t="1694080428445"
@@ -85,7 +79,26 @@ const userInfoStore = useUserInfoStore()
         </svg>
         <b class="user-name">{{ userInfoStore.userInfo.name }}</b>
       </div>
-    </a-popover>
+      <template #overlay>
+        <a-menu>
+          <a-menu-item>
+            {{ $t("user.authority") }}：{{ userInfoStore.userInfo.role.name }}
+          </a-menu-item>
+          <a-menu-divider />
+          <a-menu-item>
+            {{ $t("user.department") }} ：{{ userInfoStore.userInfo.department.name }}
+          </a-menu-item>
+          <a-menu-divider />
+          <a-menu-item>
+            {{ $t("user.phone") }}：{{ userInfoStore.userInfo.cellphone }}
+          </a-menu-item>
+          <a-menu-divider />
+          <a-menu-item @click="exit">
+            <div style="text-align: center">{{ $t("user.exit") }}</div>
+          </a-menu-item>
+        </a-menu>
+      </template>
+    </a-dropdown>
   </div>
 </template>
 <style lang="scss" scoped>

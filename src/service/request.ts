@@ -2,6 +2,7 @@ import axios from "axios"
 import NProgress from "nprogress"
 import { useSystemStore } from "@/stores/system"
 import openNotification from "@/hooks/useNotification"
+import httpErrorStatusHandle from "@/utils/httpErrorStatusHandle"
 import type { AxiosInstance, InternalAxiosRequestConfig } from "axios"
 import type { requestInterceptors, requestConfig } from "./type"
 
@@ -35,11 +36,9 @@ class myAxios {
     }, (error) => {
       const systemStore = useSystemStore()
       systemStore.loading = false
-      if (error.response.status === 401) {
-        // systemStore.exit()
-      }
+      httpErrorStatusHandle(error, systemStore)
       NProgress.done()
-      return error
+      return Promise.reject(error)
     })
   }
 

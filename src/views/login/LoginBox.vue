@@ -1,17 +1,14 @@
 <script setup lang="ts">
 import { ref } from "vue"
-import { useLoginStore } from "@/stores/login"
-import { useUserInfoStore } from "@/stores/user"
 import { useRouter } from "vue-router"
 import AccountForm from "./components/AccountForm.vue"
 import PhoneForm from "./components/PhoneForm.vue"
 import useCache from "@/utils/cache"
 import api from "@/service/api"
+import init from "@/utils/init"
 
 import { UserOutlined, PhoneOutlined } from "@ant-design/icons-vue"
 
-const loginStore = useLoginStore()
-const userStore = useUserInfoStore()
 const router = useRouter()
 
 const activeKey = ref("1")
@@ -30,14 +27,18 @@ const submit = async () => {
         useCache.removeItem("cmsPassword")
       }
     })
-    let res = await api.accountLogin(accountFormRef.value?.accountFormState)
-    loginStore.token = res.data.token
-    userStore.userID = res.data.id
-    useCache.setItem("cmsToken", res.data.token)
-    useCache.setItem("cmsUserID", res.data.id)
-    await userStore.getUserInfo()
-    await userStore.getUserMenu()
-    router.push("/main")
+    await api
+      .accountLogin(accountFormRef.value?.accountFormState)
+      .then((res) => {
+        useCache.setItem("cmsToken", res.data.token)
+        useCache.setItem("cmsUserID", res.data.id)
+        init().then(() => {
+          router.push("/main")
+        })
+      })
+      .catch((err) => {
+        console.warn(err)
+      })
   }
 }
 </script>

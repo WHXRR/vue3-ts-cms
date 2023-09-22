@@ -47,6 +47,7 @@ export const useSystemStore = defineStore("system", () => {
     useCache.removeItem("cmsUserID")
     useCache.removeItem("cmsUserInfo")
     useCache.removeItem("cmsUserMenus")
+    useCache.removeItem("cmsHistoryRoutes")
     router.push("/login")
   }
   return {
