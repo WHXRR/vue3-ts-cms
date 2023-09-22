@@ -30,11 +30,16 @@ const pagination = reactive({
 })
 const getRoleList = () => {
   api
-    .getRoleList({
-      offset: pagination.pageSize * pagination.current - pagination.pageSize,
-      size: pagination.pageSize,
-      ...formData.value
-    })
+    .getRoleList(
+      {
+        offset: pagination.pageSize * pagination.current - pagination.pageSize,
+        size: pagination.pageSize,
+        ...formData.value
+      },
+      {
+        showLoading: true
+      }
+    )
     .then((res) => {
       const { list, totalCount } = res.data
       roleList.value = list

@@ -1,5 +1,5 @@
 import api from "../../index"
-import type { IDataType, IUserListType } from "./types"
+import type { IDataType, IUserListType, IConfig } from "./types"
 
 enum SystemURL {
   UserList = '/users/list',
@@ -45,11 +45,11 @@ export function editUser(Info: any, id: number) {
   })
 }
 
-export function getRoleList(queryInfo: any) {
+export function getRoleList(queryInfo: any, config?: IConfig) {
   return api.post<IDataType<IUserListType>>({
     url: SystemURL.RoleList,
     data: queryInfo,
-    showLoading: true
+    ...config
   })
 }
 

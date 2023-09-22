@@ -23,7 +23,7 @@ export const useUserInfoStore = defineStore("user", () => {
   }
   function getUserMenu() {
     const systemStore = useSystemStore()
-    return api.getUserMenu(userID.value).then(async res => {
+    return api.getUserMenu(userInfo.value.role.id).then(async res => {
       if (!res.data || !res.data.length) {
         systemStore.exit()
         openNotification('用户菜单为空')
@@ -53,6 +53,8 @@ export const useUserInfoStore = defineStore("user", () => {
     return api.getRoleList({
       offset: 0,
       size: 100
+    }, {
+      showLoading: false
     }).then(res => {
       roleList.value = res.data.list.map(item => ({
         ...item,
