@@ -12,7 +12,7 @@ const { t } = useI18n()
 const optionData = ref<IData[]>([])
 const option = computed(() => ({
   title: {
-    text: t("analysis.categoryCount"),
+    text: t("analysis.categoryFavor"),
     left: "center"
   },
   tooltip: {
@@ -23,23 +23,43 @@ const option = computed(() => ({
   },
   series: [
     {
-      name: "categoryCount",
+      name: "categoryFavor",
       type: "pie",
-      radius: "50%",
       center: ["50%", "45%"],
+      radius: ["20%", "55%"],
+      avoidLabelOverlap: false,
+      itemStyle: {
+        borderRadius: 10,
+        borderColor: "#fff",
+        borderWidth: 2
+      },
+      label: {
+        show: false,
+        position: "center"
+      },
+      emphasis: {
+        label: {
+          show: true,
+          fontSize: 20,
+          fontWeight: "bold"
+        }
+      },
+      labelLine: {
+        show: false
+      },
       data: optionData.value
     }
   ]
 }))
-const getCategoryCount = () => {
-  api.getCategoryCount().then((res) => {
+const getCategoryFavor = () => {
+  api.getCategoryFavor().then((res) => {
     optionData.value = res.data.map((item) => ({
-      value: item.goodsCount,
+      value: item.goodsFavor,
       name: item.name
     }))
   })
 }
-getCategoryCount()
+getCategoryFavor()
 </script>
 <template>
   <div>

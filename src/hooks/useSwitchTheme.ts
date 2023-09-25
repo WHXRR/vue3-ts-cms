@@ -9,6 +9,8 @@ export const setCssVar = (isDark: string) => {
   Object.entries(theme).forEach(([name, value]) => {
     if (['--color', '--scroll-bar-color'].includes(name)) {
       document.documentElement.style.setProperty(name, systemStore.systemThemeColor.color)
+    } else if (['--background-color'].includes(name)) {
+      document.documentElement.style.setProperty(name, systemStore.systemThemeColor.bgColor)
     } else {
       document.documentElement.style.setProperty(name, value)
     }

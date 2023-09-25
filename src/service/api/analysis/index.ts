@@ -40,14 +40,14 @@ export function getSaleTop10(config?: IConfig) {
 
 export function getAddressSale(config?: IConfig) {
   return api.get<IDataType<ICategoryCountListType>>({
-    url: DashboardURL.AmountList,
+    url: DashboardURL.AddressSale,
     ...config
   })
 }
 
 export function getAmountList(config?: IConfig) {
   return api.get<IDataType<IAddressSale>>({
-    url: DashboardURL.AddressSale,
+    url: DashboardURL.AmountList,
     ...config
   })
 }

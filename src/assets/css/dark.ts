@@ -1,6 +1,6 @@
 // 定义暗黑主题变量
 const darkTheme = {
-  '--background-color': '#1b1c21',
+  '--background-color': '',
   '--scroll-bar-color': '#35373f',
   '--color': '',
   '--tabs-border-bottom-color': 'rgba(253, 253, 253, 0.12)',

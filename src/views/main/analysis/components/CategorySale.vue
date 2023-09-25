@@ -12,34 +12,35 @@ const { t } = useI18n()
 const optionData = ref<IData[]>([])
 const option = computed(() => ({
   title: {
-    text: t("analysis.categoryCount"),
+    text: t("analysis.categorySale"),
     left: "center"
-  },
-  tooltip: {
-    trigger: "item"
   },
   legend: {
     top: "bottom"
   },
   series: [
     {
-      name: "categoryCount",
+      name: "categorySale",
       type: "pie",
-      radius: "50%",
+      data: optionData.value,
+      radius: [20, 120],
       center: ["50%", "45%"],
-      data: optionData.value
+      roseType: "area",
+      itemStyle: {
+        borderRadius: 8
+      }
     }
   ]
 }))
-const getCategoryCount = () => {
-  api.getCategoryCount().then((res) => {
+const getCategorySale = () => {
+  api.getCategorySale().then((res) => {
     optionData.value = res.data.map((item) => ({
       value: item.goodsCount,
       name: item.name
     }))
   })
 }
-getCategoryCount()
+getCategorySale()
 </script>
 <template>
   <div>

@@ -87,5 +87,9 @@ export default {
   },
   analysis: {
     categoryCount: 'Category Count',
+    categorySale: 'Category Sale',
+    categoryFavor: 'Category Favor',
+    addressSale: 'Address Sale',
+    AmountList: 'Amount List',
   }
 }

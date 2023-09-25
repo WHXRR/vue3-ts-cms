@@ -87,5 +87,9 @@ export default {
   },
   analysis: {
     categoryCount: '类目统计',
+    categorySale: '类目销售',
+    categoryFavor: '类目收藏',
+    addressSale: '地区销售',
+    AmountList: '销售额类目',
   }
 }

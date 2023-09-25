@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from "vue"
+import { onMounted, ref, watch } from "vue"
 import { useSystemStore } from "@/stores/system"
 import useECharts from "@/hooks/useECharts"
 
@@ -15,47 +15,50 @@ const props = withDefaults(
     height: "300px"
   }
 )
-
 const baseECharts = ref<HTMLElement>()
-const echarts = ref()
-const bgColor = computed(() => (systemStore.systemTheme === "light" ? "#ffffff" : "#1b1c21"))
+const MyECharts = ref()
 watch(
   () => systemStore.systemTheme,
-  (val) => {
-    echarts.value.dispose()
-    const { echartsInstance, setOption } = useECharts(baseECharts.value!, val)
-    echarts.value = echartsInstance
-    setOption({
+  () => {
+    MyECharts.value.dispostECharts()
+    const { echartsMethods } = useECharts(baseECharts.value!, systemStore.systemTheme)
+    MyECharts.value = echartsMethods
+    MyECharts.value.setOption({
       ...props.options,
-      backgroundColor: bgColor.value
+      backgroundColor: systemStore.systemThemeColor.bgColor
     })
   }
 )
+
 onMounted(() => {
-  const { echartsInstance, setOption } = useECharts(baseECharts.value!, systemStore.systemTheme)
-  echarts.value = echartsInstance
-  setOption({
+  const { echartsMethods } = useECharts(baseECharts.value!, systemStore.systemTheme)
+  MyECharts.value = echartsMethods
+  MyECharts.value.setOption({
     ...props.options,
-    backgroundColor: bgColor.value
+    backgroundColor: systemStore.systemThemeColor.bgColor
   })
 })
 
 watch(
   () => props.options,
   (newValue) => {
-    echarts.value.setOption({
+    MyECharts.value.setOption({
       ...newValue,
-      backgroundColor: bgColor.value
+      backgroundColor: systemStore.systemThemeColor.bgColor
     })
   },
   {
     deep: true
   }
 )
+
+defineExpose({
+  MyECharts
+})
 </script>
 <template>
   <div>
-    <div class="echarts-item" ref="baseECharts" :style="{ width, height }"></div>
+    <div class="MyECharts-item" ref="baseECharts" :style="{ width, height }"></div>
   </div>
 </template>
 <style lang="scss" scoped></style>

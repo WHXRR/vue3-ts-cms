@@ -3,22 +3,32 @@ import type { EChartsOption } from "echarts"
 
 function useECharts(el: HTMLElement, theme: string = 'light') {
 
+  const echartsMethods = {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setOption: (options: EChartsOption) => { },
+    updateSize: () => { },
+    dispostECharts: () => { }
+  }
   const echartsInstance = echarts.init(el, theme)
 
-  const setOption = (options: EChartsOption) => {
+  echartsMethods.setOption = (options: EChartsOption) => {
     echartsInstance.setOption(options)
   }
 
-  const updateSize = () => {
+  echartsMethods.updateSize = () => {
     echartsInstance.resize()
   }
 
-  window.addEventListener('resize', updateSize)
+  echartsMethods.dispostECharts = () => {
+    window.removeEventListener('resize', echartsMethods.updateSize)
+    echartsInstance.dispose()
+  }
+
+  window.addEventListener('resize', echartsMethods.updateSize)
 
   return {
     echartsInstance,
-    setOption,
-    updateSize
+    echartsMethods
   }
 }
 export default useECharts
