@@ -25,7 +25,7 @@ const option = computed(() => ({
     {
       name: "categoryCount",
       type: "pie",
-      radius: "50%",
+      radius: "40%",
       center: ["50%", "45%"],
       data: optionData.value
     }
@@ -43,7 +43,7 @@ getCategoryCount()
 </script>
 <template>
   <div>
-    <BaseECharts :options="option" height="400px" />
+    <BaseECharts :options="option" height="300px" />
   </div>
 </template>
 <style lang="scss" scoped></style>

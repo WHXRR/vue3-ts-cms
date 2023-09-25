@@ -23,7 +23,7 @@ const option = computed(() => ({
       name: "categorySale",
       type: "pie",
       data: optionData.value,
-      radius: [20, 120],
+      radius: [20, 70],
       center: ["50%", "45%"],
       roseType: "area",
       itemStyle: {
@@ -44,7 +44,7 @@ getCategorySale()
 </script>
 <template>
   <div>
-    <BaseECharts :options="option" height="400px" />
+    <BaseECharts :options="option" height="300px" />
   </div>
 </template>
 <style lang="scss" scoped></style>

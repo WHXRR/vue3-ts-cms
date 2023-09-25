@@ -26,7 +26,7 @@ const option = computed(() => ({
       name: "categoryFavor",
       type: "pie",
       center: ["50%", "45%"],
-      radius: ["20%", "55%"],
+      radius: ["20%", "45%"],
       avoidLabelOverlap: false,
       itemStyle: {
         borderRadius: 10,
@@ -40,7 +40,7 @@ const option = computed(() => ({
       emphasis: {
         label: {
           show: true,
-          fontSize: 20,
+          fontSize: 15,
           fontWeight: "bold"
         }
       },
@@ -63,7 +63,7 @@ getCategoryFavor()
 </script>
 <template>
   <div>
-    <BaseECharts :options="option" height="400px" />
+    <BaseECharts :options="option" height="300px" />
   </div>
 </template>
 <style lang="scss" scoped></style>

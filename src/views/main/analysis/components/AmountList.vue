@@ -13,6 +13,9 @@ const option = computed(() => ({
     text: t("analysis.AmountList"),
     left: "center"
   },
+  grid: {
+    left: "15%"
+  },
   xAxis: {
     axisLabel: {
       inside: false
@@ -46,7 +49,6 @@ const option = computed(() => ({
     {
       name: "AmountList",
       type: "bar",
-      showBackground: true,
       itemStyle: {
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           { offset: 0, color: "#f8dcda" },
