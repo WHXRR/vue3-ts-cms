@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed } from "vue"
 import { useI18n } from "vue-i18n"
-import packageData from "@/assets/js/package.json.ts"
-import tree from "@/assets/js/tree.ts"
+import packageData from "@/assets/js/package"
+import tree from "@/assets/js/tree"
 
 const { t } = useI18n()
 const textArr1 = computed(() => {
