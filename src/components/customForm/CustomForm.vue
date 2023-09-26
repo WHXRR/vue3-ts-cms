@@ -166,7 +166,7 @@ defineExpose({
         <slot name="formBtn"></slot>
       </div>
     </div>
-    <div style="text-align: right; padding-top: 10px" v-if="showCollapsed">
+    <div style="text-align: right; padding-top: 5px" v-if="showCollapsed">
       <a-button
         size="small"
         type="link"
