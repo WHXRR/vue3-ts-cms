@@ -4,6 +4,7 @@ import { reactive, ref } from "vue"
 import { ControlTableColumnsBtn } from "@/components"
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons-vue"
 import api from "@/service/api"
+import usePermissions from "@/hooks/usePermissions"
 
 const departmentList = ref<any>([])
 const tableColumns = ref<any[]>([])
@@ -34,6 +35,8 @@ getDepartmentList()
 const delDepartment = (id: number) => {
   console.log(id)
 }
+const isUpdate = usePermissions("users", "update")
+const isDelete = usePermissions("users", "delete")
 </script>
 <template>
   <div>
@@ -72,8 +75,16 @@ const delDepartment = (id: number) => {
         </template>
         <template v-if="['action'].includes(column.dataIndex)">
           <a-space wrap>
-            <a-button size="small" type="link"><EditOutlined />{{ $t("form.edit") }}</a-button>
-            <a-button size="small" type="link" danger @click="delDepartment(record.id)">
+            <a-button size="small" type="link" v-if="isUpdate"
+              ><EditOutlined />{{ $t("form.edit") }}</a-button
+            >
+            <a-button
+              size="small"
+              type="link"
+              danger
+              @click="delDepartment(record.id)"
+              v-if="isDelete"
+            >
               <DeleteOutlined />
               {{ $t("form.delete") }}</a-button
             >

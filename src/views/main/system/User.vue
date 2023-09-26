@@ -7,6 +7,7 @@ import { useI18n } from "vue-i18n"
 import AddUser from "./components/AddUser.vue"
 import useCache from "@/utils/cache"
 import api from "@/service/api"
+import usePermissions from "@/hooks/usePermissions"
 import type { IForm, IFormItems } from "@/components/customForm/types"
 
 const { t } = useI18n()
@@ -81,10 +82,15 @@ const editUser = (data: any) => {
   dialogTitle.value = t("user.editUser")
   userInfo.value = data
 }
+
+const isCreate = usePermissions("users", "create")
+const isUpdate = usePermissions("users", "update")
+const isDelete = usePermissions("users", "delete")
+const isQuery = usePermissions("users", "query")
 </script>
 <template>
   <div>
-    <div class="search-form">
+    <div class="search-form" v-if="isQuery">
       <CustomForm
         v-bind="formConfig"
         v-model="formData"
@@ -94,7 +100,7 @@ const editUser = (data: any) => {
     </div>
     <div class="mt-20">
       <div class="options">
-        <a-button type="primary" size="small" class="mr-10" @click="addUser">{{
+        <a-button type="primary" size="small" class="mr-10" v-if="isCreate" @click="addUser">{{
           $t("form.add")
         }}</a-button>
         <ControlTableColumnsBtn
@@ -132,10 +138,10 @@ const editUser = (data: any) => {
           </template>
           <template v-if="['action'].includes(column.dataIndex)">
             <a-space wrap>
-              <a-button size="small" type="link" @click="editUser(record)"
+              <a-button size="small" type="link" @click="editUser(record)" v-if="isUpdate"
                 ><EditOutlined />{{ $t("form.edit") }}</a-button
               >
-              <a-button size="small" type="link" danger @click="delUser(record.id)">
+              <a-button size="small" type="link" danger @click="delUser(record.id)" v-if="isDelete">
                 <DeleteOutlined />
                 {{ $t("form.delete") }}</a-button
               >

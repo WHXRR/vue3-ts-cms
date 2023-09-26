@@ -3,6 +3,7 @@ import { ref } from "vue"
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons-vue"
 import { menuListColumns } from "./config"
 import api from "@/service/api"
+import usePermissions from "@/hooks/usePermissions"
 import type { IMenu } from "./types"
 
 const menuList = ref<any>([])
@@ -33,6 +34,8 @@ getMenuList()
 const delMenu = (id: number) => {
   console.log(id)
 }
+const isUpdate = usePermissions("users", "update")
+const isDelete = usePermissions("users", "delete")
 </script>
 <template>
   <div>
@@ -46,8 +49,10 @@ const delMenu = (id: number) => {
         </template>
         <template v-if="['action'].includes(column.dataIndex)">
           <a-space wrap>
-            <a-button size="small" type="link"><EditOutlined />{{ $t("form.edit") }}</a-button>
-            <a-button size="small" type="link" danger @click="delMenu(record.id)">
+            <a-button size="small" type="link" v-if="isUpdate"
+              ><EditOutlined />{{ $t("form.edit") }}</a-button
+            >
+            <a-button size="small" type="link" danger @click="delMenu(record.id)" v-if="isDelete">
               <DeleteOutlined />
               {{ $t("form.delete") }}
             </a-button>

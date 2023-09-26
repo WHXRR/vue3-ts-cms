@@ -6,6 +6,7 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons-vue"
 import { useI18n } from "vue-i18n"
 import AddRole from "./components/AddRole.vue"
 import api from "@/service/api"
+import usePermissions from "@/hooks/usePermissions"
 import type { IForm, IFormItems } from "@/components/customForm/types"
 
 const { t } = useI18n()
@@ -71,10 +72,14 @@ const editRole = (data: any) => {
   dialogTitle.value = t("role.editRole")
   info.value = data
 }
+const isCreate = usePermissions("users", "create")
+const isUpdate = usePermissions("users", "update")
+const isDelete = usePermissions("users", "delete")
+const isQuery = usePermissions("users", "query")
 </script>
 <template>
   <div>
-    <div class="search-form">
+    <div class="search-form" v-if="isQuery">
       <CustomForm
         v-bind="formConfig"
         v-model="formData"
@@ -84,7 +89,7 @@ const editRole = (data: any) => {
     </div>
     <div class="mt-20">
       <div class="options">
-        <a-button class="mr-10" type="primary" size="small" @click="addRole">{{
+        <a-button class="mr-10" type="primary" size="small" @click="addRole" v-if="isCreate">{{
           $t("form.add")
         }}</a-button>
         <ControlTableColumnsBtn :columns="roleListColumns" v-model:tableColumns="tableColumns" />
@@ -118,10 +123,10 @@ const editRole = (data: any) => {
           </template>
           <template v-if="['action'].includes(column.dataIndex)">
             <a-space wrap>
-              <a-button size="small" type="link" @click="editRole(record)"
+              <a-button size="small" type="link" @click="editRole(record)" v-if="isUpdate"
                 ><EditOutlined />{{ $t("form.edit") }}</a-button
               >
-              <a-button size="small" type="link" danger @click="delRole(record.id)">
+              <a-button size="small" type="link" danger @click="delRole(record.id)" v-if="isDelete">
                 <DeleteOutlined />
                 {{ $t("form.delete") }}</a-button
               >
