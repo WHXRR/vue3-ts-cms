@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import { FullscreenOutlined, FullscreenExitOutlined } from "@ant-design/icons-vue"
-import HeaderTabs from "@/components/headerTabs/HeaderTabs.vue"
+import { HeaderTabs } from "@/components"
 import Language from "./components/Language.vue"
 import SwitchTheme from "./components/SwitchTheme.vue"
 import UserInfo from "./components/UserInfo.vue"

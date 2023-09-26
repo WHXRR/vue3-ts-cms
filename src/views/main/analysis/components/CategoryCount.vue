@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from "vue"
 import { useI18n } from "vue-i18n"
-import BaseECharts from "@/components/echarts/BaseECharts.vue"
+import { BaseECharts } from "@/components"
 import api from "@/service/api"
 
 interface IData {

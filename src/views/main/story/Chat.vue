@@ -1,29 +1,16 @@
 <script setup lang="ts">
-import { onBeforeUnmount, ref, shallowRef } from "vue"
-import { Editor, Toolbar } from "@wangeditor/editor-for-vue"
+import { ref } from "vue"
 import { useI18n } from "vue-i18n"
 import { formItems } from "./config"
-import { CustomForm } from "@/components"
+import { CustomForm, Editor } from "@/components"
 import api from "@/service/api"
 import "@wangeditor/editor/dist/css/style.css"
 import type { IForm, IFormItems } from "@/components/customForm/types"
 
 const { t } = useI18n()
-const editorRef = shallowRef()
-const valueHtml = ref("")
-
 const editorConfig = { placeholder: t("story.input") }
 
-onBeforeUnmount(() => {
-  const editor = editorRef.value
-  if (editor == null) return
-  editor.destroy()
-})
-
-const handleCreated = (editor: any) => {
-  editorRef.value = editor
-}
-
+const valueHtml = ref("")
 const open = ref(false)
 const formRef = ref()
 const formConfig = ref<IForm>({
@@ -52,12 +39,10 @@ const submit = () => {
 </script>
 <template>
   <div class="box-module-shadow editor-container">
-    <Toolbar class="toolbar" :editor="editorRef" />
     <Editor
-      style="height: calc(100vh - 300px); overflow-y: hidden"
       v-model="valueHtml"
-      :defaultConfig="editorConfig"
-      @onCreated="handleCreated"
+      :editorConfig="editorConfig"
+      editorStyle="height: calc(100vh - 300px); overflow-y: hidden"
     />
   </div>
   <div class="btn">

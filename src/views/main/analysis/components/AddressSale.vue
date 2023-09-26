@@ -2,7 +2,7 @@
 import { computed, ref, onBeforeUnmount } from "vue"
 import { useI18n } from "vue-i18n"
 import { useSystemStore } from "@/stores/system"
-import BaseECharts from "@/components/echarts/BaseECharts.vue"
+import { BaseECharts } from "@/components"
 import api from "@/service/api"
 
 const { t } = useI18n()
