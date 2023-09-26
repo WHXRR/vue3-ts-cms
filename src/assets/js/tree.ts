@@ -15,10 +15,6 @@ const treeStr = `
 |   tsconfig.node.json
 |   vite.config.ts
 |
-+---.github
-|   ---workflows
-|           main.yml
-|
 +---.husky
 |   |   commit-msg
 |   |   pre-commit
@@ -27,13 +23,7 @@ const treeStr = `
 |           .gitignore
 |           husky.sh
 |
-+---.vscode
-|       extensions.json
-|       settings.json
-|
 +---public
-|       favicon.ico
-|       login.png
 |       xiaoxing.png
 |
 ---src
@@ -48,8 +38,17 @@ const treeStr = `
     |   |       theme.css
     |   |
     |   +---img
+    |   |       1.png
+    |   |       2.png
+    |   |       3.png
+    |   |       4.png
+    |   |       5.png
+    |   |       6.png
+    |   |       7.png
+    |   |
     |   ---js
     |           package.json.ts
+    |           tree.ts
     |
     +---components
     |   |   index.ts
@@ -63,6 +62,9 @@ const treeStr = `
     |   |
     |   +---echarts
     |   |       BaseECharts.vue
+    |   |
+    |   +---editor
+    |   |       Editor.vue
     |   |
     |   ---headerTabs
     |           HeaderTabs.vue
@@ -135,6 +137,10 @@ const treeStr = `
     |       |       index.ts
     |       |       types.ts
     |       |
+    |       +---story
+    |       |       index.ts
+    |       |       types.ts
+    |       |
     |       ---system
     |               index.ts
     |               types.ts
@@ -180,6 +186,7 @@ const treeStr = `
         |   |
         |   +---story
         |   |       Chat.vue
+        |   |       config.ts
         |   |       List.vue
         |   |
         |   ---system

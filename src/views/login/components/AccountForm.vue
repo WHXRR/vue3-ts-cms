@@ -4,7 +4,7 @@ import useCache from "@/utils/cache"
 
 const accountFormRef = ref()
 const accountFormState = ref({
-  name: useCache.getItem("cmsAccount") ?? "coderwhy",
+  name: useCache.getItem("cmsAccount") ?? "root",
   password: useCache.getItem("cmsPassword") ?? "123456"
 })
 

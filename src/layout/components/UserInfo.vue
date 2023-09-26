@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useUserInfoStore } from "@/stores/user"
 import { useSystemStore } from "@/stores/system"
+import { LoginOutlined } from "@ant-design/icons-vue"
 const userInfoStore = useUserInfoStore()
 const systemStore = useSystemStore()
 const exit = () => {
@@ -94,7 +95,10 @@ const exit = () => {
           </a-menu-item>
           <a-menu-divider />
           <a-menu-item @click="exit">
-            <div style="text-align: center">{{ $t("user.exit") }}</div>
+            <div style="text-align: center">
+              <LoginOutlined />
+              <span style="padding-left: 5px">{{ $t("user.exit") }}</span>
+            </div>
           </a-menu-item>
         </a-menu>
       </template>

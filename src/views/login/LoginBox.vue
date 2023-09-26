@@ -41,11 +41,20 @@ const submit = async () => {
       })
   }
 }
+
+const getImages = (i: number) => {
+  const path = new URL(`../../assets/img/${i}.png`, import.meta.url)
+  return path as unknown as string
+}
 </script>
 <template>
   <div class="login-container">
     <div class="login-left">
-      <img class="login-img" src="/login.png" alt="" />
+      <a-carousel autoplay dotsClass="dot">
+        <div v-for="item in 7" :key="item">
+          <img :src="getImages(item)" alt="" />
+        </div>
+      </a-carousel>
     </div>
     <div class="login-right">
       <div class="login-box">
@@ -79,14 +88,30 @@ const submit = async () => {
 .login-container {
   height: 100%;
   display: flex;
+
   .login-left {
+    padding: 20px;
     width: 50%;
     height: 100%;
-    background-image: linear-gradient(#ffffff, #ffffff);
-    .login-img {
-      width: 100%;
+    background-color: var(--content-background-color);
+    :deep(.ant-carousel) {
       height: 100%;
-      object-fit: cover;
+    }
+    :deep(.slick-slider) {
+      height: 100%;
+    }
+    :deep(.slick-list) {
+      height: 100%;
+    }
+    :deep(.slick-track) {
+      height: 100%;
+    }
+    :deep(.slick-slide) {
+      height: 100%;
+      overflow: hidden;
+    }
+    :deep(.slick-dots li button) {
+      background: var(--color);
     }
   }
   .login-right {
@@ -95,13 +120,13 @@ const submit = async () => {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f8f8f8;
+    background-color: var(--content-background-color);
     .login-box {
       width: 90%;
       max-width: 350px;
       padding: 10px 20px;
       border-radius: 20px;
-      background-color: #fff;
+      background-color: var(--background-color);
       box-shadow:
         0 6px 16px 0 rgba(0, 0, 0, 0.08),
         0 3px 6px -4px rgba(0, 0, 0, 0.12),
