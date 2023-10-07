@@ -15,10 +15,14 @@ async function init() {
   if (token && userID) {
     loginStore.token = token
     userStore.userID = userID
-    await userStore.getUserInfo()
-    await userStore.getDepartmentList()
-    await userStore.getRoleList()
-    await userStore.getUserMenu()
+    try {
+      await userStore.getUserInfo()
+      await userStore.getDepartmentList()
+      await userStore.getRoleList()
+      await userStore.getUserMenu()
+    } catch (error) {
+      console.warn(error);
+    }
   }
 }
 
