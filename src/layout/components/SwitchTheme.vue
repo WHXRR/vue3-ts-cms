@@ -2,16 +2,35 @@
 import { useSystemStore } from "@/stores/system"
 import Icon from "@ant-design/icons-vue"
 import setCssVar from "@/hooks/useSwitchTheme"
+import { ref } from "vue"
 
 const systemStore = useSystemStore()
-const changeTheme = (val: string) => {
-  setCssVar(val)
+const changeTheme = async (val: string) => {
+  if (!document.startViewTransition) {
+    return setCssVar(val)
+  }
+  const vt = document.startViewTransition(() => setCssVar(val))
+  await vt.ready
+  const radius = Math.hypot(window.innerWidth, window.innerHeight)
+  const frameConfig = {
+    clipPath: [
+      `circle(0 at ${window.innerWidth}px ${0}px)`,
+      `circle(${radius}px at ${window.innerWidth}px ${0}px)`
+    ] // 圆形
+  }
+  const timingConfig = {
+    duration: 400,
+    pseudoElement: "::view-transition-new(root)"
+  }
+  document.documentElement.animate(frameConfig, timingConfig)
 }
+
+const theme = ref(systemStore.systemTheme)
 </script>
 <template>
   <div class="switch-theme">
     <a-switch
-      v-model:checked="systemStore.systemTheme"
+      v-model:checked="theme"
       checkedValue="light"
       unCheckedValue="dark"
       @change="changeTheme"

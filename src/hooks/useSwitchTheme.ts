@@ -3,9 +3,10 @@ import { lightTheme } from "@/assets/css/light"
 import { useSystemStore } from "@/stores/system"
 import useCache from "@/utils/cache"
 
-export const setCssVar = (isDark: string) => {
+export const setCssVar = async (isDark: string) => {
   const theme = isDark === 'dark' ? darkTheme : lightTheme
   const systemStore = useSystemStore()
+  systemStore.systemTheme = isDark
   Object.entries(theme).forEach(([name, value]) => {
     if (['--color', '--scroll-bar-color'].includes(name)) {
       document.documentElement.style.setProperty(name, systemStore.systemThemeColor.color)
