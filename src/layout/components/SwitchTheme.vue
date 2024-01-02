@@ -4,6 +4,12 @@ import Icon from "@ant-design/icons-vue"
 import setCssVar from "@/hooks/useSwitchTheme"
 import { ref } from "vue"
 
+declare global {
+  interface Document {
+    startViewTransition: Function
+  }
+}
+
 const systemStore = useSystemStore()
 const changeTheme = async (val: string) => {
   if (!document.startViewTransition) {
